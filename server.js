@@ -1,21 +1,20 @@
 const express = require('express');
+const session = require('express-session');
+const routes = require('./controllers');
+const exphbs = require('express-handlebars');
+const hbs = exphbs.create({});
 const path = require('path');
+const sequelize = require('./config/connection');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Add a static middleware for serving assets in the public folder
-app.use(express.static('public'));
+app.use(routes);
 
-// Return index.html page
-app.get('/', (req, res) => 
-    res.sendFile(path.join(__dirname, '/public/index.html'))
-
-);
-
-app.listen(PORT, () => {
-    console.log(`Express is working on port ${PORT}`);
-});
+app.listen(PORT, () => console.log('Now listening on port ' + PORT));
