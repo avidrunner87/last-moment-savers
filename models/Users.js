@@ -11,10 +11,9 @@ class Users extends Model {
 Users.init(
   {
     id: {
-      type: DataTypes.UUIDV4,
+      type: DataTypes.UUID,
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
+      primaryKey: true
     },
     first_name: {
       type: DataTypes.STRING,
@@ -22,7 +21,7 @@ Users.init(
     },
     last_name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
     email: {
       type: DataTypes.STRING,
@@ -48,16 +47,7 @@ Users.init(
     }
   },
   {
-    hooks: {
-      beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
-        return newUserData;
-      },
-      beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-        return updatedUserData;
-      },
-    },
+    
     sequelize,
     timestamps: false,
     freezeTableName: true,

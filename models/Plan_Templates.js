@@ -6,13 +6,13 @@ class Plan_Templates extends Model { }
 Plan_Templates.init(
     {
         id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
+            
         },        
         event_template_id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.UUID,
             references: {
                 model: 'event_templates',
                 key: 'id',

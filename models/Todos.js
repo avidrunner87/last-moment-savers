@@ -6,13 +6,13 @@ class Todos extends Model { }
 Todos.init(
     {
         id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
+            
         },
         user_id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.UUID,
             references: {
                 model: 'users',
                 key: 'id',
@@ -20,7 +20,7 @@ Todos.init(
             }
         },
         plan_id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.UUID,
             references: {
                 model: 'plans',
                 key: 'id',
