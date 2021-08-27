@@ -9,7 +9,6 @@ Event_Templates.init(
             type: DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
         },        
         title: {
             type: DataTypes.STRING,

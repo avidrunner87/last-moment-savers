@@ -6,13 +6,15 @@ class Plans extends Model { }
 Plans.init(
     {
         id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
+            primaryKey: true
+            
         },
         user_id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             references: {
                 model: 'users',
                 key: 'id',
@@ -20,9 +22,10 @@ Plans.init(
             }
         },
         event_id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             references: {
-                model: 'plans',
+                model: 'events',
                 key: 'id',
                 unique: false
             }
