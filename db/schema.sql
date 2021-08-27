@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS lastMoment_db;
+CREATE DATABASE lastMoment_db;
