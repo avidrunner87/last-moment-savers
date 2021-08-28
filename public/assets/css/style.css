@@ -1,4 +1,12 @@
-.nav-margin {
-    margin-left: 10px;
-    margin-right: 20px;
+.hero-image {
+    background-image: url("../images/celebration.jpg");
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero-text {
+    margin-top: 300px;
+    text-shadow: #616161 3px 3px;
 }

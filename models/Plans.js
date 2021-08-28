@@ -7,28 +7,9 @@ Plans.init(
     {
         id: {
             type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true
             
-        },
-        user_id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            references: {
-                model: 'users',
-                key: 'id',
-                unique: false
-            }
-        },
-        event_id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            references: {
-                model: 'events',
-                key: 'id',
-                unique: false
-            }
         },
         title: {
             type: DataTypes.STRING,

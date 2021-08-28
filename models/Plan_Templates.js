@@ -11,14 +11,6 @@ Plan_Templates.init(
             primaryKey: true,
             
         },        
-        event_template_id: {
-            type: DataTypes.UUID,
-            references: {
-                model: 'event_templates',
-                key: 'id',
-                unique: false
-            }
-        },
         title: {
             type: DataTypes.STRING,
             allowNull: false,

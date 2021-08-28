@@ -11,22 +11,6 @@ Interactions.init(
             primaryKey: true,
             
         },
-        user_id: {
-            type: DataTypes.UUID,
-            references: {
-                model: 'users',
-                key: 'id',
-                unique: false
-            }
-        },
-        event_id: {
-            type: DataTypes.UUID,
-            references: {
-                model: 'plans',
-                key: 'id',
-                unique: false
-            }
-        },
         role: {
             type: DataTypes.STRING,
             allowNull: false,

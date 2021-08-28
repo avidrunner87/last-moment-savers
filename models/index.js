@@ -1,63 +1,99 @@
 const Users = require('./Users');
-const Interactions = require('./Interactions');
 const Events = require('./Events');
 const Plans = require('./Plans');
 const Todos = require('./Todos');
+const Comments = require('./Comments');
+const Interactions = require('./Interactions');
+const Event_Templates = require('./Event_Templates');
+const Plan_Templates = require('./Plan_Templates');
+const Todo_Templates = require('./Todo_Templates');
 
-Users.hasMany(Events, {
-    foreignKey: 'user_id'
+Events.belongsTo(Users,{
+    as: 'users',
+    foreignKey: {
+        name: 'users_id',
+        allowNull: false
+    }
 });
 
-Events.belongsTo(Users, {
-    foreignKey: 'user_id'
+Plans.belongsTo(Users,{
+    as: 'users',
+    foreignKey: {
+        name: 'users_id',
+        allowNull: false
+    }
 });
 
-Users.hasMany(Interactions, {
-    foreignKey: 'user_id'
+Plans.belongsTo(Events,{
+    as: 'events',
+    foreignKey: {
+        name: 'events_id',
+        allowNull: false
+    }
 });
 
-Interactions.belongsTo(Users, {
-    foreignKey: 'user_id'
+Todos.belongsTo(Users,{
+    as: 'users',
+    foreignKey: {
+        name: 'users_id',
+        allowNull: false
+    }
 });
 
-Users.hasMany(Plans, {
-    foreignKey: 'user_id'
+Todos.belongsTo(Plans,{
+    as: 'plans',
+    foreignKey: {
+        name: 'plans_id',
+        allowNull: false
+    }
 });
 
-Plans.belongsTo(Users, {
-    foreignKey: 'user_id'
+Comments.belongsTo(Users,{
+    as: 'users',
+    foreignKey: {
+        name: 'users_id',
+        allowNull: false
+    }
 });
 
-Users.hasMany(Todos, {
-    foreignKey: 'user_id'
+Comments.belongsTo(Todos,{
+    as: 'todos',
+    foreignKey: {
+        name: 'todos_id',
+        allowNull: false
+    }
 });
 
-Todos.belongsTo(Users, {
-    foreignKey: 'user_id'
+Interactions.belongsTo(Users,{
+    as: 'users',
+    foreignKey: {
+        name: 'users_id',
+        allowNull: false
+    }
 });
 
-Events.hasMany(Interactions, {
-    foreignKey: 'event_id'
+Interactions.belongsTo(Events,{
+    as: 'events',
+    foreignKey: {
+        name: 'events_id',
+        allowNull: false
+    }
 });
 
-Interactions.belongsTo(Events, {
-    foreignKey: 'event_id'
+Plan_Templates.belongsTo(Event_Templates,{
+    as: 'event_templates',
+    foreignKey: {
+        name: 'event_templates_id',
+        allowNull: false
+    }
 });
 
-Events.hasMany(Plans, {
-    foreignKey: 'event_id'
+Todo_Templates.belongsTo(Plan_Templates,{
+    as: 'plan_templates',
+    foreignKey: {
+        name: 'plan_templates_id',
+        allowNull: false
+    }
 });
 
-Plans.belongsTo(Events, {
-    foreignKey: 'event_id'
-});
-
-Plans.hasMany(Todos, {
-    foreignKey: 'plan_id'
-});
-
-Todos.belongsTo(Plans, {
-    foreignKey: 'plan_id'
-});
-
-module.exports = { Users, Interactions, Events, Plans, Todos}
+module.exports = { Users, Events, Plans, Todos, Comments, Interactions, Event_Templates, Plan_Templates, Todo_Templates}

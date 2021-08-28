@@ -6,7 +6,7 @@ class Event_Templates extends Model { }
 Event_Templates.init(
     {
         id: {
-            type: DataTypes.UUIDV4,
+            type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
         },        
