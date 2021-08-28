@@ -1,10 +1,7 @@
 const router = require('express').Router();
 
-const { Event_Items, Events, Plans, ToDos, Users } = require('../models');
-
-router.get('/', async(req, res) => {
-
-});
-
+router.get('/', (req, res) => 
+    res.render('homepage')
+);
 
 module.exports = router;
