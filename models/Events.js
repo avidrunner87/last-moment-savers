@@ -11,45 +11,37 @@ Events.init(
             primaryKey: true,
             
         },
-        user_id: {
-            type: DataTypes.UUID,
-            references: {
-                model: 'users',
-                key: 'id',
-                unique: false
-            }
-        },
         title: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         start_date: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
         end_date: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         location: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         type: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         category: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         url: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         created_at:
         {

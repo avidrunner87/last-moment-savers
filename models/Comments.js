@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Interactions extends Model { }
+class Comments extends Model { }
 
-Interactions.init(
+Comments.init(
     {
         id: {
             type: DataTypes.UUID,
@@ -11,7 +11,7 @@ Interactions.init(
             primaryKey: true,
             
         },
-        role: {
+        body: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -31,8 +31,8 @@ Interactions.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'interactions',
+        modelName: 'comments',
     }
 );
 
-module.exports = Interactions;
+module.exports = Comments;

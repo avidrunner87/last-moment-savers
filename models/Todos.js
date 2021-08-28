@@ -11,33 +11,17 @@ Todos.init(
             primaryKey: true,
             
         },
-        user_id: {
-            type: DataTypes.UUID,
-            references: {
-                model: 'users',
-                key: 'id',
-                unique: false
-            }
-        },
-        plan_id: {
-            type: DataTypes.UUID,
-            references: {
-                model: 'plans',
-                key: 'id',
-                unique: false
-            }
-        },
         title: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         due_date: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         }, 
         status: {
             type: DataTypes.STRING,

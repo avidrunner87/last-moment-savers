@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Interactions extends Model { }
+class Todo_Templates extends Model { }
 
-Interactions.init(
+Todo_Templates.init(
     {
         id: {
             type: DataTypes.UUID,
@@ -11,7 +11,11 @@ Interactions.init(
             primaryKey: true,
             
         },
-        role: {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        description: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -31,8 +35,8 @@ Interactions.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'interactions',
+        modelName: 'todo_templates',
     }
 );
 
-module.exports = Interactions;
+module.exports = Todo_Templates;

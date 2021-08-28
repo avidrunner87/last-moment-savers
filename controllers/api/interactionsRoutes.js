@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Users, Interactions, Events, Plans, Todos } = require('../models');
+const { Users, Interactions, Events, Plans, Todos } = require('../../models');
 
 router.get('/', async(req, res) => {
     
