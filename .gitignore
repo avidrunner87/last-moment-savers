@@ -104,4 +104,4 @@ typings/
 .tern-port
 
 # Apple Finder file
-.DS_Store
+**/.DS_Store
