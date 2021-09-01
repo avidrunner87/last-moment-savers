@@ -1,37 +1,34 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Plan_Templates extends Model { }
+class Plan_Templates extends Model {}
 
 Plan_Templates.init(
     {
         id: {
             type: DataTypes.UUID,
             allowNull: false,
-            primaryKey: true,
-            
-        },        
+            primaryKey: true
+        },
         title: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
-        created_at:
-        {
+        created_at: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: false
         },
-        updated_at:
-        {
+        updated_at: {
             type: DataTypes.DATE,
-            allowNull: false,
-        },
+            allowNull: false
+        }
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'plan_templates',
+        modelName: 'plan_templates'
     }
 );
 

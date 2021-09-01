@@ -1,48 +1,46 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Event_Templates extends Model { }
+class Event_Templates extends Model {}
 
 Event_Templates.init(
     {
         id: {
             type: DataTypes.UUID,
             allowNull: false,
-            primaryKey: true,
-        },        
+            primaryKey: true
+        },
         title: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },        
+            allowNull: false
+        },
         description: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },        
+            allowNull: false
+        },
         type: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         category: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },        
-        created_at:
-        {
-            type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: false
         },
-        updated_at:
-        {
+        created_at: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: false
         },
+        updated_at: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'event_templates',
+        modelName: 'event_templates'
     }
 );
 

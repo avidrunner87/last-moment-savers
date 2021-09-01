@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Plans extends Model { }
+class Plans extends Model {}
 
 Plans.init(
     {
@@ -9,29 +9,26 @@ Plans.init(
             type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true
-            
         },
         title: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
-        created_at:
-        {
+        created_at: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: false
         },
-        updated_at:
-        {
+        updated_at: {
             type: DataTypes.DATE,
-            allowNull: false,
-        },
+            allowNull: false
+        }
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'plans',
+        modelName: 'plans'
     }
 );
 

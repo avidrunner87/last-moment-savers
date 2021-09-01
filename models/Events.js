@@ -1,65 +1,62 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Events extends Model { }
+class Events extends Model {}
 
 Events.init(
     {
         id: {
             type: DataTypes.UUID,
             allowNull: false,
-            primaryKey: true,
-            
+            primaryKey: true
         },
         title: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         start_date: {
             type: DataTypes.DATE,
-            allowNull: true,
+            allowNull: true
         },
         end_date: {
             type: DataTypes.DATE,
-            allowNull: true,
+            allowNull: true
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: true
         },
         location: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: true
         },
         type: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: true
         },
         category: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: true
         },
         url: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: true
         },
-        created_at:
-        {
+        created_at: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: false
         },
-        updated_at:
-        {
+        updated_at: {
             type: DataTypes.DATE,
-            allowNull: false,
-        },
+            allowNull: false
+        }
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'events',
+        modelName: 'events'
     }
 );
 

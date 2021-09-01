@@ -13,10 +13,10 @@ $('#login-submit').on('click', async function (event) {
             body: JSON.stringify(user)
         });
 
-        if(response.ok) {
+        if (response.ok) {
             document.location.replace('/dashboard');
         } else {
-            M.toast({html: response.statusText})
+            M.toast({ html: response.statusText });
         }
     } catch (err) {
         console.log(err);
@@ -38,10 +38,10 @@ $('#signup-submit').on('click', async function (event) {
             body: JSON.stringify(user)
         });
 
-        if(response.ok) {
+        if (response.ok) {
             document.location.replace('/dashboard');
         } else {
-            M.toast({html: response.statusText})
+            M.toast({ html: response.statusText });
         }
     } catch (err) {
         console.log(err);

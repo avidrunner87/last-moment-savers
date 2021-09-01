@@ -1,41 +1,38 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Todo_Templates extends Model { }
+class Todo_Templates extends Model {}
 
 Todo_Templates.init(
     {
         id: {
             type: DataTypes.UUID,
             allowNull: false,
-            primaryKey: true,
-            
+            primaryKey: true
         },
         title: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
-        created_at:
-        {
+        created_at: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: false
         },
-        updated_at:
-        {
+        updated_at: {
             type: DataTypes.DATE,
-            allowNull: false,
-        },
+            allowNull: false
+        }
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'todo_templates',
+        modelName: 'todo_templates'
     }
 );
 
