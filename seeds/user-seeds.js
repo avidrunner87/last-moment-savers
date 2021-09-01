@@ -1,6 +1,5 @@
-const { UUIDV4 } = require('sequelize/types');
 const { Users } = require('../models');
-const { uuid } = require(UUIDV4)
+const { uuid } = require('uuidv4')
 
 const usersData = [
   {
