@@ -1,10 +1,9 @@
-const { UUIDV4 } = require('sequelize/types');
 const { Comments } = require('../models');
-const { uuid } = require(UUIDV4)
+const { uuid } = require('uuidv4')
 
 const commentsData = [
     {
-        id:uuid(),
+        id: uuid(),
         body: 'Ill dust',
         created_at: 02-05-2022,
         updated_at:02-09-2022
@@ -16,7 +15,7 @@ const commentsData = [
         updated_at:02-09-2022
       },
       {
-        id:uuid(),
+        id: uuid(),
         body: 'Ill sweep the kitchen',
         created_at: 02-05-2022,
         updated_at:02-09-2022

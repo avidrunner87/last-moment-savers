@@ -1,6 +1,5 @@
-const { UUIDV4 } = require('sequelize/types');
 const { Events } = require('../models');
-const { uuid } = require(UUIDV4)
+const { uuid } = require('uuidv4')
 
 const eventsData = [
   {
