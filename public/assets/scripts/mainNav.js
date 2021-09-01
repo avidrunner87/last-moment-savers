@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     $('.sidenav').sidenav();
     $('.modal').modal();
     formatNavBar();
@@ -13,4 +13,4 @@ function formatNavBar() {
 }
 
 // Change the format nav based on screen size
-$(window).on("resize", formatNavBar);
+$(window).on('resize', formatNavBar);

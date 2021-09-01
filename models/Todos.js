@@ -1,49 +1,46 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Todos extends Model { }
+class Todos extends Model {}
 
 Todos.init(
     {
         id: {
             type: DataTypes.UUID,
             allowNull: false,
-            primaryKey: true,
-            
+            primaryKey: true
         },
         title: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: true
         },
         due_date: {
             type: DataTypes.DATE,
-            allowNull: true,
-        }, 
+            allowNull: true
+        },
         status: {
             type: DataTypes.STRING,
-            allowNull: false,
-        }, 
-        created_at:
-        {
-            type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: false
         },
-        updated_at:
-        {
+        created_at: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: false
         },
+        updated_at: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'todos',
+        modelName: 'todos'
     }
 );
 

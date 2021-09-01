@@ -8,7 +8,7 @@ const Event_Templates = require('./Event_Templates');
 const Plan_Templates = require('./Plan_Templates');
 const Todo_Templates = require('./Todo_Templates');
 
-Events.belongsTo(Users,{
+Events.belongsTo(Users, {
     as: 'users',
     foreignKey: {
         name: 'users_id',
@@ -16,7 +16,7 @@ Events.belongsTo(Users,{
     }
 });
 
-Plans.belongsTo(Users,{
+Plans.belongsTo(Users, {
     as: 'users',
     foreignKey: {
         name: 'users_id',
@@ -24,7 +24,7 @@ Plans.belongsTo(Users,{
     }
 });
 
-Plans.belongsTo(Events,{
+Plans.belongsTo(Events, {
     as: 'events',
     foreignKey: {
         name: 'events_id',
@@ -32,7 +32,7 @@ Plans.belongsTo(Events,{
     }
 });
 
-Todos.belongsTo(Users,{
+Todos.belongsTo(Users, {
     as: 'users',
     foreignKey: {
         name: 'users_id',
@@ -40,7 +40,7 @@ Todos.belongsTo(Users,{
     }
 });
 
-Todos.belongsTo(Plans,{
+Todos.belongsTo(Plans, {
     as: 'plans',
     foreignKey: {
         name: 'plans_id',
@@ -48,7 +48,7 @@ Todos.belongsTo(Plans,{
     }
 });
 
-Comments.belongsTo(Users,{
+Comments.belongsTo(Users, {
     as: 'users',
     foreignKey: {
         name: 'users_id',
@@ -56,7 +56,7 @@ Comments.belongsTo(Users,{
     }
 });
 
-Comments.belongsTo(Todos,{
+Comments.belongsTo(Todos, {
     as: 'todos',
     foreignKey: {
         name: 'todos_id',
@@ -64,7 +64,7 @@ Comments.belongsTo(Todos,{
     }
 });
 
-Interactions.belongsTo(Users,{
+Interactions.belongsTo(Users, {
     as: 'users',
     foreignKey: {
         name: 'users_id',
@@ -72,7 +72,7 @@ Interactions.belongsTo(Users,{
     }
 });
 
-Interactions.belongsTo(Events,{
+Interactions.belongsTo(Events, {
     as: 'events',
     foreignKey: {
         name: 'events_id',
@@ -80,7 +80,7 @@ Interactions.belongsTo(Events,{
     }
 });
 
-Plan_Templates.belongsTo(Event_Templates,{
+Plan_Templates.belongsTo(Event_Templates, {
     as: 'event_templates',
     foreignKey: {
         name: 'event_templates_id',
@@ -88,7 +88,7 @@ Plan_Templates.belongsTo(Event_Templates,{
     }
 });
 
-Todo_Templates.belongsTo(Plan_Templates,{
+Todo_Templates.belongsTo(Plan_Templates, {
     as: 'plan_templates',
     foreignKey: {
         name: 'plan_templates_id',
@@ -96,4 +96,14 @@ Todo_Templates.belongsTo(Plan_Templates,{
     }
 });
 
-module.exports = { Users, Events, Plans, Todos, Comments, Interactions, Event_Templates, Plan_Templates, Todo_Templates}
+module.exports = {
+    Users,
+    Events,
+    Plans,
+    Todos,
+    Comments,
+    Interactions,
+    Event_Templates,
+    Plan_Templates,
+    Todo_Templates
+};

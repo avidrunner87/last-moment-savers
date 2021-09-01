@@ -1,37 +1,34 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Comments extends Model { }
+class Comments extends Model {}
 
 Comments.init(
     {
         id: {
             type: DataTypes.UUID,
             allowNull: false,
-            primaryKey: true,
-            
+            primaryKey: true
         },
         body: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
-        created_at:
-        {
+        created_at: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: false
         },
-        updated_at:
-        {
+        updated_at: {
             type: DataTypes.DATE,
-            allowNull: false,
-        },
+            allowNull: false
+        }
     },
     {
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'comments',
+        modelName: 'comments'
     }
 );
 
