@@ -1,38 +1,45 @@
-const { Comment } = require('../models');
+const { Interactions } = require('../models');
 
-const commentData = [
+const interactionsData = [
   {
-    comment_text: "Awesome site!",
-    post_id: 3,
-    user_id: 1
+    id: "Superbowl Party",
+    role: "Host",
+    created_at: 02-09-2022,
+    updated_at:02-05-2022
+
   },
   {
-    comment_text: "I like posting comments.",
-    post_id: 1,
-    user_id: 4
+    id: "Superbowl Party",
+    role: "Host",
+    created_at: 02-09-2022,
+    updated_at:02-05-2022
   },
   {
-    comment_text: "How do I delete cookies?",
-    post_id: 4,
-    user_id: 2
+    id: "Superbowl Party",
+    role: "Host",
+    created_at: 02-09-2022,
+    updated_at:02-05-2022
   },
   {
-    comment_text: "Great. Now I'm hungry for cookies.",
-    post_id: 4,
-    user_id: 3
+    id: "Superbowl Party",
+    role: "Host",
+    created_at: 02-09-2022,
+    updated_at:02-05-2022
   },
   {
-    comment_text: "Delete system.32",
-    post_id: 5,
-    user_id: 5
+    id: "Superbowl Party",
+    role: "Host",
+    created_at: 02-09-2022,
+    updated_at:02-05-2022
   },
   {
-    comment_text: "My computer wont turn on now what did I just do? ",
-    post_id: 5,
-    user_id: 4
+    id: "Superbowl Party",
+    role: "Host",
+    created_at: 02-09-2022,
+    updated_at:02-05-2022
   },
 ];
 
-const seedComments = () => Comment.bulkCreate(commentData);
+const seedInteractions = () => Comment.bulkCreate(interactionsData);
 
-module.exports = seedComments;
+module.exports = seedInteractions;

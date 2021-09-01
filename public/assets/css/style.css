@@ -1,5 +1,5 @@
 .hero-image {
-    background-image: url("../images/celebration.jpg");
+    background-image: url("../images/hero.jpg");
     height: 500px;
     background-position: center;
     background-repeat: no-repeat;
@@ -9,4 +9,37 @@
 .hero-text {
     margin-top: 300px;
     text-shadow: #616161 3px 3px;
+}
+
+.login-image {
+    background-image: url("../images/login.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.login-screen {
+    height: 100vh;
+}
+
+.login-card {
+    border-radius: 20px;
+}
+
+.modal-card {
+    max-width: 500px;
+    border-radius: 20px;
+}
+
+.sideNavDiv {
+    min-height:75px;
+}
+
+.sideNavHeader {
+    font-size: 2.1rem;
+}
+
+.sideNavHeader > .material-icons {
+    margin: 0px 10px;
 }

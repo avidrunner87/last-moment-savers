@@ -1,38 +1,86 @@
-const { Event } = require('../models');
+const { Events } = require('../models');
 
-const commentData = [
+const eventsData = [
   {
-    comment_text: "Awesome site!",
-    post_id: 3,
-    user_id: 1
+    id: "Superbowl Party",
+    title: 3,
+    start_date: 02-09-2022,
+    end_date:02-09-2022,
+    description:"Superbowl Party",
+    location: '123 Fake Street',
+    type:'get together',
+    category:'Friends',
+    url:'www.myfakesuperbowlparty.com',
+    created_at:02-05-2022,
+    updated_at:02-05-2022,
+
+  },
+  {id: "Superbowl Party",
+  title: 3,
+  start_date: 02-09-2022,
+  end_date:02-09-2022,
+  description:"Superbowl Party",
+  location: '123 Fake Street',
+  type:'get together',
+  category:'Friends',
+  url:'www.myfakesuperbowlparty.com',
+  created_at:02-05-2022,
+  updated_at:02-05-2022,
   },
   {
-    comment_text: "I like posting comments.",
-    post_id: 1,
-    user_id: 4
+    id: "Superbowl Party",
+    title: 3,
+    start_date: 02-09-2022,
+    end_date:02-09-2022,
+    description:"Superbowl Party",
+    location: '123 Fake Street',
+    type:'get together',
+    category:'Friends',
+    url:'www.myfakesuperbowlparty.com',
+    created_at:02-05-2022,
+    updated_at:02-05-2022,
   },
   {
-    comment_text: "How do I delete cookies?",
-    post_id: 4,
-    user_id: 2
+    id: "Superbowl Party",
+    title: 3,
+    start_date: 02-09-2022,
+    end_date:02-09-2022,
+    description:"Superbowl Party",
+    location: '123 Fake Street',
+    type:'get together',
+    category:'Friends',
+    url:'www.myfakesuperbowlparty.com',
+    created_at:02-05-2022,
+    updated_at:02-05-2022,
   },
   {
-    comment_text: "Great. Now I'm hungry for cookies.",
-    post_id: 4,
-    user_id: 3
+    id: "Superbowl Party",
+    title: 3,
+    start_date: 02-09-2022,
+    end_date:02-09-2022,
+    description:"Superbowl Party",
+    location: '123 Fake Street',
+    type:'get together',
+    category:'Friends',
+    url:'www.myfakesuperbowlparty.com',
+    created_at:02-05-2022,
+    updated_at:02-05-2022,
   },
   {
-    comment_text: "Delete system.32",
-    post_id: 5,
-    user_id: 5
-  },
-  {
-    comment_text: "My computer wont turn on now what did I just do? ",
-    post_id: 5,
-    user_id: 4
+    id: "Superbowl Party",
+    title: 3,
+    start_date: 02-09-2022,
+    end_date:02-09-2022,
+    description:"Superbowl Party",
+    location: '123 Fake Street',
+    type:'get together',
+    category:'Friends',
+    url:'www.myfakesuperbowlparty.com',
+    created_at:02-05-2022,
+    updated_at:02-05-2022,
   },
 ];
 
-const seedComments = () => Comment.bulkCreate(commentData);
+const seedEvents = () => Comment.bulkCreate(eventsData);
 
-module.exports = seedComments;
+module.exports = seedEvents;
