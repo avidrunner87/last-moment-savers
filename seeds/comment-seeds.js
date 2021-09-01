@@ -1,39 +1,43 @@
+const { UUIDV4 } = require('sequelize/types');
 const { Comments } = require('../models');
+const { uuid } = require(UUIDV4)
 
 const commentsData = [
     {
-        id: "Cody Markham",
+        id:uuid(),
         body: 'Ill dust',
         created_at: 02-05-2022,
         updated_at:02-09-2022
       },
       {
-        id: "Robert Wilson",
+        id: uuid(),
         body: 'I will clean the dishes',
         created_at: 02-05-2022,
         updated_at:02-09-2022
       },
       {
-        id: "Andrew Ronchetto",
+        id:uuid(),
         body: 'Ill sweep the kitchen',
         created_at: 02-05-2022,
         updated_at:02-09-2022
       },
       {
-        id: "Anthony Cromartie",
+        id: uuid(),
         body: 'Ill mop',
         created_at: 02-05-2022,
         updated_at:02-09-2022
       },
       {
-        id: "Autumn Markham",
+        id: uuid(),
         body: 'Ill fix the cushions',
         created_at: 02-05-2022,
         updated_at:02-09-2022
       },
     ];
 
-
-const seedComments = () => Comment.bulkCreate(commentsData);
+const seedComments = () => Comments.bulkCreate(commentsData, {
+  individualHooks: true,
+  returning: true,
+});
 
 module.exports = seedComments;
