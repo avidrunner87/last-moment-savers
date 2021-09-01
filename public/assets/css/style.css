@@ -24,10 +24,22 @@
 }
 
 .login-card {
-    border-radius: 40px;
+    border-radius: 20px;
 }
 
 .modal-card {
     max-width: 500px;
-    border-radius: 40px;
+    border-radius: 20px;
+}
+
+.sideNavDiv {
+    min-height:75px;
+}
+
+.sideNavHeader {
+    font-size: 2.1rem;
+}
+
+.sideNavHeader > .material-icons {
+    margin: 0px 10px;
 }
