@@ -1,8 +1,9 @@
 <div class="navbar-fixed">
-    <nav class="navbar grey darken-2">
+    <nav class="grey darken-2">
         <div class="container nav-wrapper">
-            <a href="/" class="brand-logo">Last Moment</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <a href="/" class="brand-logo"><i class="material-icons">filter_center_focus</i>Last Moment</a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
                 <li><a href="/dashboard">App</a></li>
                 <li><a href="/">Help</a></li>
                 <li><a href="/">Contact</a></li>
@@ -10,3 +11,11 @@
         </div>
     </nav>
 </div>
+
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="/dashboard">App</a></li>
+    <li><a href="/">Help</a></li>
+    <li><a href="/">Contact</a></li>
+</ul>
+
+<script src="/assets/scripts/mainNav.js"></script>
