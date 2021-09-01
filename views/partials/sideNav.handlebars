@@ -1,33 +1,73 @@
-<ul id='sideNav' class='sidenav sidenav-fixed'>
-    <li>
-        <div class='grey darken-2 valign-wrapper sideNavDiv'>
-            <a class='brand-logo'><span
-                    class='white-text valign-wrapper sideNavHeader'
-                ><i class='material-icons'>filter_center_focus</i>Last Moment</span></a>
+<div class="nav-mobile">
+    <nav class='grey darken-2'>
+        <div class='container nav-wrapper'>
+            <a href='/' class='brand-logo'>
+                <i class='material-icons'>
+                    filter_center_focus
+                </i>
+                Last Moment
+            </a>
+            <a href='#' data-target='sideNav' class='sidenav-trigger'>
+                <i class='material-icons'>
+                    menu
+                </i>
+            </a>
         </div>
-    </li>
-    <li>
-        <a href='/' id='home' class='waves-effect sidenav-close' tabindex='0'>
-            Home
-            <i class='material-icons left'>home</i>
-        </a>
-    </li>
-    <li>
-        <a href='#' id='logout' class='waves-effect sidenav-close' tabindex='0'>
-            Help
-            <i class='material-icons left'>help</i>
-        </a>
-    </li>
-    <li>
-        <a href='#' id='logout' class='waves-effect sidenav-close' tabindex='0'>
-            Contact
-            <i class='material-icons left'>perm_phone_msg</i>
-        </a>
-    </li>
-    <li>
-        <a href='#' id='logout' class='waves-effect sidenav-close' tabindex='0'>
-            Logout
-            <i class='material-icons left'>eject</i>
-        </a>
-    </li>
+    </nav>
+</div>
+
+<ul id='sideNav' class='sidenav sidenav-fixed'>
+        <li>
+            <div class='grey darken-2 valign-wrapper sideNavDiv'>
+                <a class='brand-logo'>
+                    <span class='white-text valign-wrapper sideNavHeader'>
+                        <i class='material-icons'>filter_center_focus</i>
+                        Last Moment
+                    </span>
+                </a>
+            </div>
+        </li>
+        <li>
+            <a href='/' id='home' class='waves-effect sidenav-close' tabindex='0'>
+                <i class='material-icons left'>home</i>
+                Home
+            </a>
+        </li>
+        <li>
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header waves-effect">
+                        <i class="material-icons left chevron">chevron_right</i>
+                        Events
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            {{> eventsList }}
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    <div class="generalContainer">
+        <li>
+            <a href='/#help' id='logout' class='waves-effect sidenav-close' tabindex='0'>
+                <i class='material-icons left'>help</i>
+                Help
+            </a>
+        </li>
+        <li>
+            <a href='/#contact' id='logout' class='waves-effect sidenav-close' tabindex='0'>
+                <i class='material-icons left'>perm_phone_msg</i>
+                Contact
+            </a>
+        </li>
+        <li>
+            <a href='#' id='logout' class='waves-effect sidenav-close' tabindex='0'>
+                <i class='material-icons left'>eject</i>
+                Logout
+            </a>
+        </li>
+    </div>
 </ul>
+
+<script src='/assets/scripts/sideNav.js'></script>

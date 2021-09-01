@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $(".messageJavascript").remove();
+    
     $('.sidenav').sidenav();
-    formatNavBar();
+    $('.collapsible').collapsible();
 });
