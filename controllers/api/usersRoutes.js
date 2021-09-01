@@ -1,20 +1,73 @@
 const router = require('express').Router();
-const { Users, Interactions, Events, Plans, Todos } = require('../../models');
+const { uuid } = require('uuidv4');
+const { Users } = require('../../models');
 
-router.get('/', async(req, res) => {
-    
+router.post('/', async (req, res) => {
+  try {
+    const userData = await Users.create({
+        id: uuid(),
+        email: req.body.email,
+        password: req.body.password
+    });
+
+    req.session.save(() => {
+      req.session.users_id = userData.id;
+      req.session.logged_in = true;
+    });
+
+    res 
+        .status(200)
+        .json({message: 'Signed up successfully!'});
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
-router.post('/', async(req, res) => {
-    
+router.post('/login', async (req, res) => {
+  try {
+    const userData = await Users.findOne({ where: { email: req.body.email } });
+
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
+
+    req.session.save(async () => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+
+      res.json({ user: userData, message: 'You are now logged in!' });
+    });
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
-router.put('/', async(req, res) => {
-    
-});
+router.post('/logout', (req, res) => {
+  console.log('logging out called', req.session);
 
-router.delete('/', async(req, res) => {
-    
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      console.log('try to destory session');
+      res.status(204).end();
+    });
+  } else {
+    console.log('else llgout');
+    res.status(404).end();
+  }
 });
 
 module.exports = router;
