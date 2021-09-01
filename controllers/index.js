@@ -4,7 +4,6 @@ const homeRoutes = require('./homeRoutes');
 const loginRoutes = require('./loginRoutes');
 const dashboardRoutes = require('./dashboardRoutes');
 const apiRoutes = require('./api');
-const testRoutes = require('./testRoutes');
 
 router.use('/', homeRoutes);
 router.use('/login', loginRoutes);
