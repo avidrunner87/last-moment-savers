@@ -15,13 +15,22 @@ Users.init(
       primaryKey: true
     },
 
-    username: {
+    first_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: true
-      }
     },
+    last_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    // username: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   validate: {
+    //     notEmpty: true
+    //   }
+    // },
 
     email: {
       type: DataTypes.STRING,
@@ -46,10 +55,7 @@ Users.init(
         return newUserData;
       },
       async beforeUpdate(updatedUserData) {
-        updatedUserData.password = await bcrypt.hash(
-          updatedUserData.password,
-          10
-        );
+        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
         return updatedUserData;
       }
     },
