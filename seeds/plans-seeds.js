@@ -1,3 +1,4 @@
+const { Sequelize, DataTypes } = require('sequelize');
 const { Plans } = require('../models');
 const { uuid } = require('uuidv4')
 
