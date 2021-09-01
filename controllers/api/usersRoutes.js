@@ -10,15 +10,16 @@ router.post('/', async (req, res) => {
             password: req.body.password
         });
 
-        req.session.user_id = userData.id;
-        req.session.logged_in = true;
+    req.session.user_id = userData.id;
+    req.session.logged_in = true;
 
-        req.session.save(() => {
-            res.status(200).json({ message: 'Sign up user' });
-        });
-    } catch (err) {
-        res.status(500).json(err);
-    }
+    req.session.save(() => {
+      res.status(200).json({message:"Sign up user"});
+    });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.post('/login', async (req, res) => {
