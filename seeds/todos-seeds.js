@@ -22,7 +22,7 @@ const todosData = [
     },
     {
         id: uuid(),
-        title: Football,
+        title: "Football",
         description: 'Watching the Game!',
         due_date: 02 - 09 - 2022,
         status: 'Good',
