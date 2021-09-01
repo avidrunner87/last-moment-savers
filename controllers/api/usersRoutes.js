@@ -5,22 +5,20 @@ const { Users } = require('../../models');
 router.post('/', async (req, res) => {
   try {
     const userData = await Users.create({
-        id: uuid(),
-        email: req.body.email,
-        password: req.body.password
+      id: uuid(),
+      email: req.body.email,
+      password: req.body.password
     });
+
+    req.session.user_id = userData.id;
+    req.session.logged_in = true;
 
     req.session.save(() => {
-      req.session.users_id = userData.id;
-      req.session.logged_in = true;
+      res.status(200).json({message:"Sign up user"});
     });
 
-    res 
-        .status(200)
-        .json({message: 'Signed up successfully!'});
-
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
@@ -44,30 +42,30 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    req.session.save(async () => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
+    req.session.user_id = userData.id;
+    req.session.logged_in = true;
 
-      res.json({ user: userData, message: 'You are now logged in!' });
+    req.session.save(() => {
+      res.status(200).json({message:"Logged in"});
     });
 
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
-router.post('/logout', (req, res) => {
-  console.log('logging out called', req.session);
+// router.post('/logout', (req, res) => {
+//   console.log('logging out called', req.session);
 
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      console.log('try to destory session');
-      res.status(204).end();
-    });
-  } else {
-    console.log('else llgout');
-    res.status(404).end();
-  }
-});
+//   if (req.session.logged_in) {
+//     req.session.destroy(() => {
+//       console.log('try to destory session');
+//       res.status(204).end();
+//     });
+//   } else {
+//     console.log('else llgout');
+//     res.status(404).end();
+//   }
+// });
 
 module.exports = router;
