@@ -23,8 +23,21 @@
     height: 100vh;
 }
 
-.card, .action {
+.card, .action, .todo {
     border-radius: 20px !important;
+}
+
+.todo li:first-child .todo-header  {
+    border-radius: 20px 20px 0 0 !important;
+}
+
+.todo li:first-child {
+    border-radius: 0 0 20px 20px;
+}
+
+.todo li:last-child {
+    border-bottom-left-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
 }
 
 .modal-card {
@@ -48,12 +61,16 @@
     padding: 0 32px;
 }
 
-.collapsible .active .collapsible-header .chevron {
+.plan .active .collapsible-header .plan-chevron,
+.todo .active .collapsible-header .todo-chevron {
     transform: rotate(90deg);
 }
 
-.collapsible .active .collapsible-header {
+.plan .active .plan-header, .todo .active .todo-header {
     background-color: #1976d2 !important;
+}
+
+.plan .active .plan-header {
     border-bottom: none;
 }
 
@@ -68,8 +85,24 @@
     border-right: none;
 }
 
+.plans-add {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+}
+
+.plan-delete {
+    position: absolute;
+    right: 35px;
+}
+
 .plan-badge {
     margin-left: 10px !important;
+}
+
+.todo-delete {
+    position: absolute;
+    right: 65px;
 }
 
 /* Change screen when large or greater */

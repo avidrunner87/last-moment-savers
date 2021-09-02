@@ -11,9 +11,6 @@
 							<span class="card-title">Event Name</span>
 							<p>Event Details</p>
 						</div>
-						<div class="action card-action">
-							<a href="#" class="btn grey darken-2 white-text z-depth-0">New Plan</a>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -22,7 +19,10 @@
 					<div class="card blue">
 						<div class="card-content white-text">
 							<span class="card-title">Plans</span>
-							<ul class="collapsible z-depth-0 col-flat">
+								<a class="btn-floating btn-small plans-add grey">
+									<i class="material-icons">add</i>
+								</a>
+							<ul class="collapsible z-depth-0 plan col-flat">
 								{{> plansList }}
 							</ul>
 						</div>
@@ -33,3 +33,5 @@
 	</div>
 
 </main>
+
+<script src="/assets/scripts/dashboard.js"></script>
