@@ -2,9 +2,7 @@ const router = require('express').Router();
 const { uuid } = require('uuidv4');
 const withAuth = require('../../utils/auth');
 const { Users } = require('../../models');
-const {OAuth2Client} = require('google-auth-library');
-const CLIENT_ID = '770425769909-1b53dbhequvdv35mnu4o28mjn7mo7jnr.apps.googleusercontent.com'
-const client = new OAuth2Client(CLIENT_ID)
+
 
 // Create a new user
 router.post('/', async (req, res) => {
