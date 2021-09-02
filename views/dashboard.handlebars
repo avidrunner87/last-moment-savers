@@ -21,10 +21,10 @@
 										<i class="material-icons">link</i>
 									</a>
 								{{/if}}
-								<a class="btn-floating btn-small event-edit grey" data-id="{{eventData.dataValues.id}}" data-action="edit">
+								<a id="eventEdit-{{eventData.dataValues.id}}" class="btn-floating btn-small event-edit grey">
 									<i class="material-icons">edit</i>
 								</a>
-								<a class="btn-floating btn-small event-delete grey" data-id="{{eventData.dataValues.id}}" data-action="delete">
+								<a id="eventDelete-{{eventData.dataValues.id}}" class="btn-floating btn-small event-delete grey">
 									<i class="material-icons">delete</i>
 								</a>
 							</span>

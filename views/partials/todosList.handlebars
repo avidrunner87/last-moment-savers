@@ -4,10 +4,10 @@
         <div class="collapsible-header transparent plan-header">
             <i class="material-icons plan-chevron">chevron_right</i>
             {{todo.dataValues.title}}
-            <a class="btn-floating btn-small plan-edit grey" data-id="{{todo.dataValues.id}}" data-action="edit">
+            <a id="todoEdit-{{todo.dataValues.id}}" class="btn-floating btn-small todo-edit grey">
                 <i class="material-icons">edit</i>
             </a>
-            <a class="btn-floating btn-small plan-delete grey" data-id="{{todo.dataValues.id}}" data-action="delete">
+            <a id="todoDelete-{{todo.dataValues.id}}" class="btn-floating btn-small todo-delete grey">
                 <i class="material-icons">delete</i>
             </a>
         </div>

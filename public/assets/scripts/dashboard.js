@@ -5,6 +5,32 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Delete an event
+$('.event-delete').click(async function (event) {
+    if ($(event.target).is('a') === true || $(event.target).parent().is('a') === true) {
+        const event_id = event.target.id || event.target.parentNode.id;
+
+        if (event_id !== '') {
+            try {       
+                const response = await fetch(`/api/events/${event_id.split('-').slice(1).join('-')}`, {
+                    method: 'DELETE',
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    }
+                });
+            
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    M.toast({ html: response.statusText });
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+});
+
 // Execute plan creation
 $('#plan-newSubmit').on('click', async function (plan) {    
     try {
@@ -28,6 +54,32 @@ $('#plan-newSubmit').on('click', async function (plan) {
         }
     } catch (err) {
         console.log(err);
+    }
+});
+
+// Delete a plan
+$('.plan-delete').click(async function (event) {
+    if ($(event.target).is('a') === true || $(event.target).parent().is('a') === true) {
+        const plan_id = event.target.id || event.target.parentNode.id;
+
+        if (plan_id !== '') {
+            try {       
+                const response = await fetch(`/api/plans/${plan_id.split('-').slice(1).join('-')}`, {
+                    method: 'DELETE',
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    }
+                });
+            
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    M.toast({ html: response.statusText });
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
     }
 });
 
@@ -81,13 +133,12 @@ $('.plan-header').click(async function(event) {
                 $elDiv.addClass('collapsible-header transparent todo-header');
 
                 let $elIChevron = $('<i>');
-                $elIChevron.addClass('material-icons plan-chevron');
+                $elIChevron.addClass('material-icons todo-chevron');
                 $elIChevron.text('chevron_right');
 
                 let $elAEdit = $('<a>');
                 $elAEdit.addClass('btn-floating btn-small todo-edit grey');
-                $elAEdit.attr('data-todo-id', todosData[i].id);
-                $elAEdit.attr('data-action', 'edit');
+                $elAEdit.attr('id', `todoEdit-${todosData[i].id}`);
 
                 let $elAEditIChevron = $('<i>');
                 $elAEditIChevron.addClass('material-icons');
@@ -95,8 +146,7 @@ $('.plan-header').click(async function(event) {
 
                 let $elADelete = $('<a>');
                 $elADelete.addClass('btn-floating btn-small todo-delete grey');
-                $elADelete.attr('data-todo-id', todosData[i].id);
-                $elADelete.attr('data-action', 'delete');
+                $elADelete.attr('id', `todoDelete-${todosData[i].id}`);
 
                 let $elADeleteIChevron = $('<i>');
                 $elADeleteIChevron.addClass('material-icons');
@@ -161,4 +211,30 @@ $('.plan-header').click(async function(event) {
 
         }
     }
-)
+);
+
+// Delete a todo
+$('.todo-delete').click(async function (event) {
+    if ($(event.target).is('a') === true || $(event.target).parent().is('a') === true) {
+        const todo_id = event.target.id || event.target.parentNode.id;
+        console.log(todo_id);
+        if (todo_id !== '') {
+            try {       
+                const response = await fetch(`/api/todos/${todo_id.split('-').slice(1).join('-')}`, {
+                    method: 'DELETE',
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    }
+                });
+            
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    M.toast({ html: response.statusText });
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+});
