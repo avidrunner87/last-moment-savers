@@ -145,14 +145,3 @@ module.exports = router;
 
 // TODO: Every new db item needs the created_at and updated_at fields populated
 // TODO: Every update to db item needs the updated_at field populated
-
-function createSqlDate() {
-    const date = new Date().toLocaleDateString();
-    const dateArray = date.split("/");
-    return dateArray[2] + "/" + dateArray[0] + "/" + dateArray[1];
-}
-
-function modifyDateForSql(date) {
-    const dateArray = date.split("-");
-    return dateArray[2] + "/" + dateArray[0] + "/" + dateArray[1];
-}
