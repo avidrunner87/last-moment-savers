@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Users } = require('../models');
 
 router.get('/', (req, res) => {
-    res.render('login');
+    res.render('login.handlebars');
 });
 
 router.post('/', async (req, res) => {
@@ -37,6 +37,26 @@ router.post('/', async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
+});
+
+router.post('/', (req,res)=>{
+    let token = req.body.token;
+
+    async function verify() {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: '770425769909-1b53dbhequvdv35mnu4o28mjn7mo7jnr.apps.googleusercontent.com'
+        });
+        const payload = ticket.getPayload();
+        const user_id = payload['sub'];
+      }
+      verify()
+      .then(()=>{
+          res.cookie('session-token', token);
+          res.send('success')
+      })
+      .catch(console.error);
+
 });
 
 module.exports = router;
