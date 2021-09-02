@@ -3,7 +3,7 @@ const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
     const { user_id, logged_in } = req.session;
-    res.render('dashboard', {
+    res.render('dashboard.handlebars', {
         user_id,
         logged_in
     });

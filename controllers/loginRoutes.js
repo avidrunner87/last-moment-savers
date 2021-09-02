@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Users } = require('../models');
 
 router.get('/', (req, res) => {
-    res.render('login');
+    res.render('login.handlebars');
 });
 
 router.post('/', async (req, res) => {
