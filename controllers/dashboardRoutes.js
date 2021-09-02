@@ -1,8 +1,13 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
-const { Events, Plans } = require('../models');
+const { Events, Plans, Todos } = require('../models');
+const checkAuthenticated = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+const {OAuth2Client} = require('google-auth-library');
+const CLIENT_ID = '770425769909-1b53dbhequvdv35mnu4o28mjn7mo7jnr.apps.googleusercontent.com'
+const client = new OAuth2Client(CLIENT_ID)
+
+router.get('/', withAuth, checkAuthenticated, async (req, res) => {
     try {
 
         const user_id = req.session.user_id; 
@@ -21,7 +26,7 @@ router.get('/', withAuth, async (req, res) => {
     }  
 });
 
-router.get('/events/:id', withAuth, async (req, res) => {
+router.get('/events/:id', withAuth, checkAuthenticated, async (req, res) => {
     try {
 
         const user_id = req.session.user_id; 
@@ -45,8 +50,6 @@ router.get('/events/:id', withAuth, async (req, res) => {
                 events_id: req.params.id
             },          
         });
-
-        console.log(eventData);
 
         if (eventData) {
             res.render('dashboard', {

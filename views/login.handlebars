@@ -21,20 +21,34 @@
 											<input id="login-password" type="password" class="validate">
 											<label for="login-password">Password</label>
 										</div>
+										<a id="login-submit" class="waves-effect waves-light btn">Login</a>
+										<div class="input-field col s10 offset-s1">
+											Don't have an account? <a href="#modal-signup" class="modal-trigger">Get Started</a>
+										</div>	
+										<div class="input-field col s10 offset-s1">
+											<div id="g_id_onload"
+											data-client_id="770425769909-1b53dbhequvdv35mnu4o28mjn7mo7jnr.apps.googleusercontent.com"
+											data-context="signin"
+											data-ux_mode="popup"
+											data-login_uri="https://last-moment-savers.herokuapp.com/login"
+											data-auto_prompt="false">
+											</div>
+											<div class="g_id_signin"
+											data-type="standard"
+											data-shape="pill"
+											data-theme="filled_blue"
+											data-text="signin"
+											data-size="small"
+											data-locale="en-US"	
+											data-logo_alignment="center">									
+											</div>
+										</div>
 									</div>
 								</form>
-								<a id="login-submit" class="waves-effect waves-light btn">Login</a>
+								
 							</div>
 						</div>
       				</div>
-				</div>
-			</div>
-			<div class="row center-align">
-				<div class="col s12">
-					Don't have an account? <a href="#modal-signup" class="modal-trigger">Get Started</a>
-				</div>
-				<div class="col s12">
-					<a href="#modal-forgotPassword" class="modal-trigger">Forgot Password?</a>
 				</div>
 			</div>
 		</div>
@@ -91,5 +105,5 @@
   	</div>
 
 	<script src="/assets/scripts/login.js"></script>
-
+	<script src="/assets/scripts/auth.js"></script>
 </main>

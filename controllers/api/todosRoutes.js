@@ -1,28 +1,54 @@
 const router = require('express').Router();
-const { Users, Interactions, Events, Plans, Todos } = require('../../models');
-const { createSqlDate, modifyDateForSql } = require('../../utils/dateHelper');
+const { Todos } = require('../../models');
+const { uuid } = require('uuidv4');
 
-// TODO: Get all todos associated to a user ID and plan ID
-router.get('/', async(req, res) => {
-    try 
-    {
-        const user_id = req.session.user_id; 
-        const plan_id = req.session.plan_id;
+// Create a new todos
+router.post('/', async(req, res) => {
 
-        const allTodosData = await Todos.findAll({
-            where: { 
-                users_id: user_id,
-                plans_id: plan_id  
-            },          
+    try {
+        const todosData = await Todos.create({
+            id: uuid(),
+            title: req.body.title,
+            description: req.body.description,
+            due_date: req.body.due_date || null,
+            status: req.body.status,
+            created_at: new Date(),
+            updated_at: new Date(),
+            plans_id: req.body.plans_id,
+            users_id: req.session.user_id 
         });
 
-        res.status(200).json(allTodosData);
-    }
-    catch (err)
-    {
+        req.session.save(() => {
+            res.status(200).json({ message:"Added Todo" });
+        });
+    } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }    
 });
+
+// Get all todos associated to a plan
+router.get('/plans/:plan_id', async(req, res) => {
+    console.log(req);
+
+    try {
+        const user_id = req.session.user_id; 
+
+        const todosData = await Todos.findAll({
+            where: { 
+                plans_id: req.params.plan_id,
+                users_id: user_id
+            },          
+        });
+
+        res.status(200).json(todosData);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }    
+});
+
 
 // TODO: Get a single todo using the user ID and plan ID
 router.get('/:id', async(req, res) => {
