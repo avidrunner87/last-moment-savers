@@ -1,9 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
-const {OAuth2Client} = require('google-auth-library');
-const CLIENT_ID = '770425769909-1b53dbhequvdv35mnu4o28mjn7mo7jnr.apps.googleusercontent.com'
-const client = new OAuth2Client(CLIENT_ID)
+
 
 class Users extends Model {
     checkPassword(loginPw) {

@@ -7,9 +7,6 @@ const Interactions = require('./Interactions');
 const Event_Templates = require('./Event_Templates');
 const Plan_Templates = require('./Plan_Templates');
 const Todo_Templates = require('./Todo_Templates');
-const {OAuth2Client} = require('google-auth-library');
-const CLIENT_ID = '770425769909-1b53dbhequvdv35mnu4o28mjn7mo7jnr.apps.googleusercontent.com'
-const client = new OAuth2Client(CLIENT_ID)
 
 Events.belongsTo(Users, {
     as: 'users',
