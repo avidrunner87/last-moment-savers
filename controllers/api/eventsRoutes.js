@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const withAuth = require('../../utils/auth');
 const { uuid } = require('uuidv4');
 const { Events } = require('../../models');
 
@@ -7,7 +8,7 @@ const CLIENT_ID = '770425769909-1b53dbhequvdv35mnu4o28mjn7mo7jnr.apps.googleuser
 const client = new OAuth2Client(CLIENT_ID)
 
 // Get all events associated to a user
-router.get('/', async(req, res) => {
+router.get('/', withAuth, async(req, res) => {
     try {
         const user_id = req.session.user_id; 
 
@@ -23,45 +24,31 @@ router.get('/', async(req, res) => {
 });
 
 // TODO: Get a single event using the ID
-router.get('/:id', async(req, res) => {
-    try 
-    {
-        const eventData = await Events.findOne({
-            where: {
-                users_id: user_id,
-                id: req.params.id
-            }
-        });
+// router.get('/:id', withAuth, async(req, res) => {
+//     try 
+//     {
+//         const eventData = await Events.findOne({
+//             where: {
+//                 users_id: user_id,
+//                 id: req.params.id
+//             }
+//         });
 
-        if (!eventData) {
-            res.status(404).json({ message: 'No event found with this id' });
-            return;
-        }
+//         if (!eventData) {
+//             res.status(404).json({ message: "No category found with this id" });
+//             return;
+//         }
 
-        req.session.event_id = req.params.id;
-        req.session.save(() => {
-            res.status(200).json(eventData);
-        });        
-    }
-    catch (err)
-    {
-        res.status(500).json(err);
-    }    
-});
+//         res.status(200).json(eventData);
+//     }
+//     catch (err)
+//     {
+//         res.status(500).json(err);
+//     }    
+// });
 
 // Create a new event
-router.post('/', async(req, res) => {
-    /*req.body example
-    {
-        "title": "Post Event Check",
-        "start_date": "05-05-2022",
-        "end_date": "06-06-2022",
-        "description": "Checking for Post Event",
-        "location": "123 fake street",
-        "type": "get together",
-        "category": "friends",
-        "url": "www.eventpostcheck"
-    }*/
+router.post('/', withAuth, async(req, res) => {
     try {
         const eventData = await Events.create({
             id: uuid(),
@@ -88,80 +75,69 @@ router.post('/', async(req, res) => {
 });
 
 // TODO: Take form information via api body and update an event in the DB
-router.put('/:id', async(req, res) => {
-    /*req.body example
-    {
-        "title": "Update Event Check",
-        "start_date": "05-05-2022",
-        "end_date": "06-06-2022",
-        "description": "Checking for Update Event",
-        "location": "123 fake street",
-        "type": "get together",
-        "category": "friends",
-        "url": "www.eventupdatecheck"
-    }*/
-    try 
-    {
-        const { title, start_date, end_date, description, location, type, category, url } = req.body;        
-        const currentDate = new Date().toLocaleDateString();
+// router.put('/:id', async(req, res) => {
+//     try 
+//     {
+//         console.log("MADE IT");
+//         const { title, start_date, end_date, description, location, type, category, url } = req.body;
+//         console.log(req.body);
+//         const modifiedStartDate =  start_date.includes('-') ? modifyDateForSql(start_date) : start_date;
+//         const modifiedEndDate = end_date.includes('-') ? modifyDateForSql(end_date) : end_date;
+//         const newSqlDate = createSqlDate();
+//         console.log(modifiedStartDate, modifiedEndDate, newSqlDate);
 
-        const updatedEvent = {
-            id: req.params.id,
-            title: title,
-            start_date: start_date,
-            end_date: end_date,
-            description: description,
-            location: location,
-            type: type,
-            category: category,
-            url: url,
-            //created_at: req.session.event_created_at,
-            created_at: '04/05/2021', //REPLACE WITH req.session.events_created_at
-            updated_at: currentDate,            
-        };
+//         const updatedEvent = {
+//             id: req.params.id,
+//             title: title,
+//             start_date: modifiedStartDate,
+//             end_date: modifiedEndDate,
+//             description: description,
+//             location: location,
+//             type: type,
+//             category: category,
+//             url: url,
+//             created_at: "2021/04/05", //REPLACE WITH req.session.event_created_at
+//             updated_at: newSqlDate,            
+//         };
 
-        const eventData = await Events.update(updatedEvent, {
+//         console.log(updatedEvent);
+
+//         const eventData = await Events.update(updatedEvent, {
+//             where: {
+//                 users_id: "d39bae8f-d1e0-43ab-9018-d0c750c72d10",   //RANDOM UUID REPLACE WITH req.session.user_id
+//                 id: req.params.id
+//             }
+//         })
+//         res.status(200).json(eventData);
+//     }
+//     catch (err)
+//     {
+//         res.status(500).json(err);
+//     }    
+// });
+
+// Delete an event
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+
+
+        const eventsData = await Events.destroy({
             where: {
-                users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
-                //users_id: req.session.user_id,
-                id: req.params.id
+                id: req.params.id,
+                users_id: req.session.user_id
             }
-        })
-        res.status(200).json(eventData);
-    }
-    catch (err)
-    {
-        res.status(500).json(err);
-    }    
-});
-
-// TODO: Take form information via api body and delete an event in the DB
-router.delete('/:id', async(req, res) => {
-    try 
-    {
-        const eventData = await Events.destroy({
-            where: {
-                //users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
-                users_id: req.session.user_id,
-                id: req.params.id
-            }           
         });
 
-        if (!eventData) {
+        if (!eventsData) {
             res.status(404).json({ message: 'No event found with this id!' });
             return;
         }
-      
-        res.status(200).json(eventData);
-    }
-  
-    catch (err)
-    {
+
+        res.status(200).json(eventsData);
+    } catch (err) {
+        console.log(err);
         res.status(500).json(err);
-    }    
+    }
 });
 
 module.exports = router;
-
-// TODO: Every new db item needs the created_at and updated_at fields populated
-// TODO: Every update to db item needs the updated_at field populated

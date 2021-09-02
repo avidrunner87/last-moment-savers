@@ -93,6 +93,8 @@
 .event-delete {
     position: absolute;
     right: 25px;
+    z-index: 1001 !important;
+
 }
 
 .plans-add {
@@ -109,6 +111,7 @@
 .plan-delete {
     position: absolute;
     right: 35px;
+    z-index: 1001 !important;
 }
 
 .plan-badge {
@@ -128,6 +131,7 @@
 .todo-delete {
     position: absolute;
     right: 65px;
+    z-index: 1001 !important;
 }
 
 .event-quickList > ul > li {
