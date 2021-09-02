@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { uuid } = require('uuidv4');
 const { Users, Interactions, Events, Plans, Todos } = require('../../models');
+const { createSqlDate, modifyDateForSql } = require('../../utils/dateHelper');
 
 // TODO: Get all todo associated to a user
 router.get('/', async(req, res) => {
@@ -46,6 +47,17 @@ router.get('/:id', async(req, res) => {
 
 // TODO: Take form information via api body and create a new event in the DB
 router.post('/', async(req, res) => {
+    /*req.body example
+    {
+        "title": "Post Event Check",
+        "start_date": "05-05-2022",
+        "end_date": "06-06-2022",
+        "description": "Checking for Post Event",
+        "location": "123 fake street",
+        "type": "get together",
+        "category": "friends",
+        "url": "www.eventpostcheck"
+    }*/
     try 
     {      
         const { title, start_date, end_date, description, location, type, category, url } = req.body;
@@ -65,12 +77,13 @@ router.post('/', async(req, res) => {
             url: url,
             created_at: newSqlDate,
             updated_at: newSqlDate, 
+            //users_id: req.session.user_id,
             users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10'   //RANDOM UUID REPLACE WITH req.session.user_id        
         };
         
         await Events.create(event);
 
-        req.session.event_id = event.id;
+        req.session.events_id = event.id;
         req.session.event_created_at = newSqlDate;
         req.session.save(() => {
          res.status(200).json({ message:'Added Event' });
@@ -101,15 +114,15 @@ router.put('/:id', async(req, res) => {
             type: type,
             category: category,
             url: url,
-            created_at: '2021/04/05', //REPLACE WITH req.session.event_created_at
+            created_at: req.session.event_created_at,
+            //created_at: '2021/04/05', //REPLACE WITH req.session.events_created_at
             updated_at: newSqlDate,            
         };
 
-        console.log(updatedEvent);
-
         const eventData = await Events.update(updatedEvent, {
             where: {
-                users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
+                //users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
+                users_id: req.session.user_id,
                 id: req.params.id
             }
         })
@@ -127,7 +140,8 @@ router.delete('/:id', async(req, res) => {
     {
         const eventData = await Events.destroy({
             where: {
-                users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
+                //users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
+                users_id: req.session.user_id,
                 id: req.params.id
             }           
         });
@@ -149,13 +163,13 @@ module.exports = router;
 // TODO: Every new db item needs the created_at and updated_at fields populated
 // TODO: Every update to db item needs the updated_at field populated
 
-function createSqlDate() {
-    const date = new Date().toLocaleDateString();
-    const dateArray = date.split('/');
-    return dateArray[2] + '/' + dateArray[0] + '/' + dateArray[1];
-}
+// function createSqlDate() {
+//     const date = new Date().toLocaleDateString();
+//     const dateArray = date.split('/');
+//     return dateArray[2] + '/' + dateArray[0] + '/' + dateArray[1];
+// }
 
-function modifyDateForSql(date) {
-    const dateArray = date.split('-');
-    return dateArray[2] + '/' + dateArray[0] + '/' + dateArray[1];
-}
+// function modifyDateForSql(date) {
+//     const dateArray = date.split('-');
+//     return dateArray[2] + '/' + dateArray[0] + '/' + dateArray[1];
+// }

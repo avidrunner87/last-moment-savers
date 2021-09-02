@@ -1,6 +1,9 @@
 const { Events } = require('../models');
 const { uuid } = require('uuidv4');
 
+/*The dates are formatted this way to remind me that MySql stores the dates like this. The year can be in the
+front or at the end but the format has to have hyphens*/
+
 const eventsData = [
     {
         id: uuid(),
