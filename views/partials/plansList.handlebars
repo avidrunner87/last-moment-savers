@@ -1,34 +1,67 @@
-{{!-- Loop over each event in the events array --}}
+{{!-- Loop over each plan in the plans array --}}
 {{#each plansData as |plan| }}
     <li>
-        <div class="collapsible-header transparent plan-header">
+        <div class="collapsible-header transparent plan-header" data-plan-id="{{plan.dataValues.id}}">
             <i class="material-icons plan-chevron">chevron_right</i>
             {{plan.dataValues.title}}
-            <a class="btn-floating btn-small plan-delete grey">
-                <i class="material-icons">delete</i>
-            </a>
-
-            <a class="btn-floating btn-small plan-edit grey" data-id="{{plan.dataValues.id}}" data-action="edit">
+            <a class="btn-floating btn-small plan-edit grey" data-plan-id="{{plan.dataValues.id}}" data-action="edit">
                 <i class="material-icons">edit</i>
             </a>
-            <a class="btn-floating btn-small plan-delete grey" data-id="{{plan.dataValues.id}}" data-action="delete">
+            <a class="btn-floating btn-small plan-delete grey" data-plan-id="{{plan.dataValues.id}}" data-action="delete">
                 <i class="material-icons">delete</i>
             </a>
 
-            <span class="new badge grey plan-badge" data-badge-caption="todo">4</span>
+            {{!-- <span class="new badge grey plan-badge" data-badge-caption="todo">4</span>
             <span class="new badge green plan-badge" data-badge-caption="active">2</span>
-            <span class="new badge purple plan-badge" data-badge-caption="complete">10</span>
+            <span class="new badge purple plan-badge" data-badge-caption="complete">10</span> --}}
         </div>
         <div class="collapsible-body">
             <span class="card-title">
                 Todos
-                <a class="btn-floating btn-small todos-add grey">
+                <a href='#newTodo' class="btn-floating btn-small todos-add grey modal-trigger" data-plan-id="{{plan.dataValues.id}}">
                     <i class="material-icons">add</i>
                 </a>
             </span>				
-            <ul class="collapsible z-depth-0 todo">
+            <ul id="todos-{{plan.dataValues.id}}" class="collapsible z-depth-0 todo">
                 {{> todosList }}
             </ul>
         </div>
     </li>
 {{/each}}
+
+{{!-- Add / Edit Todo Form --}}
+<div id='newTodo' class='modal card modal-card black-text'>
+    <div class='modal-content'>
+        <h4>Create New Todo</h4>
+        <p>Please complete the form below and click Create</p>
+        <form class="col s12 plan-form">
+            <div class="row">
+                <div class="input-field col s10 offset-s1">
+                    <input id="todo-title" type="text" class="validate">
+                    <label for="todo-title">Title</label>
+                </div>
+                <div class="input-field col s10 offset-s1">
+                    <textarea id="todo-description" class="materialize-textarea"></textarea>
+                    <label for="todo-description">Description</label>
+                </div>
+                <div class="input-field col s10 offset-s1">
+                    <input id="todo-due" type="text" class="datepicker">
+                    <label for="todo-due">Due Date</label>
+                </div>
+                <div id="todo-status" class="input-field col s10 offset-s1">
+                    <select id="type-select">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="notStarted">Not Started</option>
+                        <option value="working">Working</option>
+                        <option value="done">Done</option>
+                    </select>
+                    <label>Status</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class='modal-footer'>
+        <a class='modal-close btn-flat'>Cancel</a>
+        <a id='todo-newSubmit' class='modal-close btn-flat'>Create</a>
+    </div>
+</div>
