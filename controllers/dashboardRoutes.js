@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
 const { Events, Plans, Todos } = require('../models');
-const checkAuthenticated = require('../utils/auth');
 
 
 
-router.get('/', withAuth, checkAuthenticated, async (req, res) => {
+
+router.get('/', withAuth, async (req, res) => {
     try {
 
         const user_id = req.session.user_id; 
@@ -24,7 +24,7 @@ router.get('/', withAuth, checkAuthenticated, async (req, res) => {
     }  
 });
 
-router.get('/events/:id', withAuth, checkAuthenticated, async (req, res) => {
+router.get('/events/:id', withAuth, async (req, res) => {
     try {
 
         const user_id = req.session.user_id; 
