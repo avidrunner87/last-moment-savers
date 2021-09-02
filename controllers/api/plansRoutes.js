@@ -28,11 +28,12 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
     try 
     {
-        const planData = await Events.findByPk(req.params.id, {
+        console.log(req.session);
+
+        const planData = await Plans.findByPk(req.params.id, {
             where: { 
                 users_id: req.session.user_id,
                 events_id: req.session.event_id,
-                id: req.params.id 
             },           
         });
 

@@ -28,11 +28,10 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
     try 
     {
-        const todoData = await Events.findByPk(req.params.id, {
+        const todoData = await Todos.findByPk(req.params.id, {
             where: { 
                 users_id: req.session.user_id,
                 plans_id: req.session.plan_id,
-                id: req.params.id 
             },           
         });
 
