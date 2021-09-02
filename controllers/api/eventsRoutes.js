@@ -29,7 +29,7 @@ router.get('/:id', async(req, res) => {
         });
 
         if (!eventData) {
-            res.status(404).json({ message: 'No category found with this id' });
+            res.status(404).json({ message: 'No event found with this id' });
             return;
         }
 

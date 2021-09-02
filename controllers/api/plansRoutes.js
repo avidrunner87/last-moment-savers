@@ -66,7 +66,7 @@ router.post('/', async(req, res) => {
             created_at: newSqlDate,
             updated_at: newSqlDate, 
             users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id 
-            events_id: 'test-this-event3' //RANDOM UUID TO TEST EVENT REPLACE WITH req.session.event_id       
+            events_id: 'test-this-event' //RANDOM UUID TO TEST EVENT REPLACE WITH req.session.event_id       
         };
         
         await Plans.create(plan);
@@ -100,7 +100,7 @@ router.put('/:id', async(req, res) => {
         const planData = await Plans.update(updatedPlan, {
             where: { 
                 users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',  //RANDOM UUID REPLACE WITH req.session.user_id 
-                events_id: 'test-this-event3', //RANDOM UUID TO TEST EVENT REPLACE WITH req.session.event_id
+                events_id: 'test-this-event', //RANDOM UUID TO TEST EVENT REPLACE WITH req.session.event_id
                 id: req.params.id 
             },   
         })
@@ -119,7 +119,7 @@ router.delete('/:id', async(req, res) => {
         const planData = await Plans.destroy({
             where: { 
                 users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',  //RANDOM UUID REPLACE WITH req.session.user_id 
-                events_id: 'test-this-event3', //RANDOM UUID TO TEST EVENT REPLACE WITH req.session.event_id
+                events_id: 'test-this-event', //RANDOM UUID TO TEST EVENT REPLACE WITH req.session.event_id
                 id: req.params.id 
             },            
         });

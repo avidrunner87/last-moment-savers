@@ -1,7 +1,7 @@
 const seedUsers = require('./user-seeds');
 const seedEvents = require('./event-seeds');
 // const seedInteractions = require('./interactions-seeds');
-// const seedPlans = require('./plans-seeds');
+const seedPlans = require('./plans-seeds');
 // const seedTodos = require('./todos-seeds');
 
 const sequelize = require('../config/connection');
@@ -22,8 +22,8 @@ const seedAll = async () => {
     // await seedInteractions();
     // console.log('\n----- INTERACTIONS SEEDED -----\n');
 
-    // await seedPlans();
-    // console.log('\n----- PLANS SEEDED -----\n');
+    await seedPlans();
+    console.log('\n----- PLANS SEEDED -----\n');
 
     // await seedTodos();
     // console.log('\n----- TODOS SEEDED -----\n');
