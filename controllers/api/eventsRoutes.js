@@ -8,11 +8,11 @@ router.get('/', async(req, res) => {
     {
         const user_id = req.session.user_id; 
 
-        const allEventsData = await Events.findAll({
+        const eventsData = await Events.findAll({
             where: { users_id: user_id },          
         });
 
-        res.status(200).json(allEventsData);
+        res.status(200).json(eventsData);
     }
     catch (err)
     {
@@ -41,37 +41,28 @@ router.get('/:id', async(req, res) => {
 
 // TODO: Take form information via api body and create a new event in the DB
 router.post('/', async(req, res) => {
-    try 
-    {      
-        const { title, start_date, end_date, description, location, type, category, url } = req.body;
-        const modifiedStartDate = modifyDateForSql(start_date);
-        const modifiedEndDate = modifyDateForSql(end_date);
-        const newSqlDate = createSqlDate();        
 
-        const event = {
+    try {
+        const eventData = await Events.create({
             id: uuid(),
-            title: title,
-            start_date: modifiedStartDate,
-            end_date: modifiedEndDate,
-            description: description,
-            location: location,
-            type: type,
-            category: category,
-            url: url,
-            created_at: newSqlDate,
-            updated_at: newSqlDate, 
-            users_id: "d39bae8f-d1e0-43ab-9018-d0c750c72d10"   //RANDOM UUID REPLACE WITH req.session.user_id        
-        };
-        
-        await Events.create(event);
-
-        req.session.event_created_at = newSqlDate;
-        req.session.save(() => {
-        res.status(200).json({ message:"Added Event" });
+            title: req.body.title,
+            description: req.body.description,          
+            type: req.body.type,
+            category: req.body.category,
+            start_date: req.body.start_date || null,
+            end_date: req.body.end_date || null,
+            location: req.body.location,
+            url: req.body.url,
+            created_at: new Date(),
+            updated_at: new Date(), 
+            users_id: req.session.user_id 
         });
-    }
-    catch (err)
-    {
+
+        req.session.save(() => {
+            res.status(200).json({ message:"Added Event" });
+        });
+    } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }    
 });

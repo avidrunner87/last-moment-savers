@@ -1,7 +1,5 @@
 // Execute signup for current user
 $('#logout-submit').on('click', async function (event) {
-    console.log('working');
-
     const response = await fetch('/api/users/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }

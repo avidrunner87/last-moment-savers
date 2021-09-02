@@ -1,4 +1,4 @@
-<div class="nav-mobile">
+<div class='nav-mobile'>
     <nav class='grey darken-2'>
         <div class='container nav-wrapper'>
             <a href='/' class='brand-logo'>
@@ -34,21 +34,27 @@
             </a>
         </li>
         <li>
-            <ul class="collapsible collapsible-accordion">
+            <ul class='collapsible collapsible-accordion'>
                 <li>
-                    <a class="collapsible-header waves-effect">
-                        <i class="material-icons left chevron">chevron_right</i>
+                    <a class='collapsible-header waves-effect event-header'>
+                        <i class='material-icons left event-chevron'>chevron_right</i>
                         Events
                     </a>
-                    <div class="collapsible-body">
+                    <div class='collapsible-body'>
                         <ul>
                             {{> eventsList }}
+                            <li>
+                                <a href='#newEvent' class='modal-trigger'>
+                                    <i class='material-icons'>add</i>
+                                    Add Event
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
             </ul>
         </li>
-    <div class="generalContainer">
+    <div class='generalContainer'>
         <li>
             <a href='/#help' id='help-link' class='waves-effect sidenav-close' tabindex='0'>
                 <i class='material-icons left'>help</i>
@@ -69,6 +75,66 @@
         </li>
     </div>
 </ul>
+
+{{!-- Add / Edit Event Form --}}
+<div id='newEvent' class='modal card modal-card'>
+    <div class='modal-content'>
+        <h4>Create New Event</h4>
+        <p>Please complete the form below and click Create to begin planning an event</p>
+        <form class="col s12 event-form">
+            <div class="row">
+                <div class="input-field col s10 offset-s1">
+                    <input id="event-title" type="text" class="validate">
+                    <label for="event-title">Title</label>
+                </div>
+                <div class="input-field col s10 offset-s1">
+                    <textarea id="event-description" class="materialize-textarea"></textarea>
+                    <label for="event-description">Description</label>
+                </div>
+                <div id="event-type" class="input-field col s10 offset-s1">
+                    <select id="type-select">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="inPerson">In Person</option>
+                        <option value="virtual">Virtual</option>
+                        <option value="hybrid">Hybrid</option>
+                    </select>
+                    <label>Type</label>
+                </div>
+                <div id="event-category" class="input-field col s10 offset-s1">
+                    <select>
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="party">Party</option>
+                        <option value="wedding">Wedding</option>
+                        <option value="happyHour">Happy Hour</option>
+                        <option value="birthday">Birthday Party</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <label>Category</label>
+                </div>
+                <div class="input-field col s10 offset-s1">
+                    <input id="event-start" type="text" class="datepicker">
+                    <label for="event-start">Start Date</label>
+                </div>
+                <div class="input-field col s10 offset-s1">
+                    <input id="event-end" type="text" class="datepicker">
+                    <label for="event-end">End Date</label>
+                </div>
+                <div class="input-field col s10 offset-s1">
+                    <input id="event-location" type="text" class="validate">
+                    <label for="event-location">Location</label>
+                </div>
+                <div class="input-field col s10 offset-s1">
+                    <textarea id="event-url" class="materialize-textarea"></textarea>
+                    <label for="event-url">URL</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class='modal-footer'>
+        <a class='modal-close btn-flat'>Cancel</a>
+        <a id='event-newSubmit' class='modal-close btn-flat'>Create</a>
+    </div>
+</div>
 
 <script src='/assets/scripts/sideNav.js'></script>
 <script src='/assets/scripts/logout.js'></script>

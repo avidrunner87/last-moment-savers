@@ -63,6 +63,7 @@
     padding: 0 32px;
 }
 
+.active .event-header .event-chevron,
 .plan .active .collapsible-header .plan-chevron,
 .todo .active .collapsible-header .todo-chevron {
     transform: rotate(90deg);
@@ -84,9 +85,9 @@
     width: 100%;
 }
 
-.col-flat {
-    /* border-left: none;
-    border-right: none; */
+.events-add {
+    position: absolute;
+    right: 10px;
 }
 
 .plans-add {
