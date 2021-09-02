@@ -1,0 +1,9 @@
+{{!-- Loop over each event in the events array --}}
+{{#each eventsData as |event| }}
+    <li>
+        <a href='/dashboard/events/{{event.dataValues.id}}' class='waves-effect'>
+            {{event.dataValues.title}}
+            <i class='material-icons left'>event</i>
+        </a>
+    </li>
+{{/each}}

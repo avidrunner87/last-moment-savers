@@ -1,3 +1,4 @@
+// Execute login for current user
 $('#login-submit').on('click', async function (event) {
     event.preventDefault();
     try {
@@ -23,6 +24,7 @@ $('#login-submit').on('click', async function (event) {
     }
 });
 
+// Execute signup for current user
 $('#signup-submit').on('click', async function (event) {
     event.preventDefault();
     try {

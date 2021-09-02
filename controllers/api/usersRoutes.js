@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { uuid } = require('uuidv4');
 const { Users } = require('../../models');
 
+// Create a new user
 router.post('/', async (req, res) => {
     try {
         const userData = await Users.create({
@@ -10,18 +11,18 @@ router.post('/', async (req, res) => {
             password: req.body.password
         });
 
-    req.session.user_id = userData.id;
-    req.session.logged_in = true;
+        req.session.user_id = userData.id;
+        req.session.logged_in = true;
 
-    req.session.save(() => {
-      res.status(200).json({message:"Sign up user"});
-    });
-
-  } catch (err) {
-    res.status(500).json(err);
-  }
+        req.session.save(() => {
+            res.status(200).json({ message: 'Sign up user' });
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
+// Login an existing user
 router.post('/login', async (req, res) => {
     try {
         const userData = await Users.findOne({
@@ -55,18 +56,15 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// router.post('/logout', (req, res) => {
-//   console.log('logging out called', req.session);
-
-//   if (req.session.logged_in) {
-//     req.session.destroy(() => {
-//       console.log('try to destory session');
-//       res.status(204).end();
-//     });
-//   } else {
-//     console.log('else llgout');
-//     res.status(404).end();
-//   }
-// });
+// Logout the current user
+router.post('/logout', (req, res) => {
+    if (req.session.logged_in) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
+});
 
 module.exports = router;
