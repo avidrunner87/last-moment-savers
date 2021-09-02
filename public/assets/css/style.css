@@ -23,14 +23,16 @@
     height: 100vh;
 }
 
-.card, .action, .todo {
+.card, .action, .plan, .todo {
     border-radius: 20px !important;
 }
 
+.plan li:first-child .plan-header,
 .todo li:first-child .todo-header  {
     border-radius: 20px 20px 0 0 !important;
 }
 
+.plan li:first-child,
 .todo li:first-child {
     border-radius: 0 0 20px 20px;
 }
@@ -66,11 +68,13 @@
     transform: rotate(90deg);
 }
 
-.plan .active .plan-header, .todo .active .todo-header {
+.plan .active .plan-header,
+.todo .active .todo-header {
     background-color: #1976d2 !important;
 }
 
-.plan .active .plan-header {
+.plan .active .plan-header,
+.todo .active .todo-header {
     border-bottom: none;
 }
 
@@ -81,8 +85,8 @@
 }
 
 .col-flat {
-    border-left: none;
-    border-right: none;
+    /* border-left: none;
+    border-right: none; */
 }
 
 .plans-add {
@@ -98,6 +102,11 @@
 
 .plan-badge {
     margin-left: 10px !important;
+}
+
+.todos-add {
+    position: absolute;
+    right: 65px;
 }
 
 .todo-delete {
