@@ -33,10 +33,11 @@ function checkAuthenticated(req, res, next){
             audience: CLIENT_ID,  
         });
         const payload = ticket.getPayload();
+        Users.id = payload.token;
         Users.first_name = payload.given_name;
         Users.last_name = payload.family_name;
         Users.email = payload.email;
-        Users.password = payload.password;
+        
       }
       verify()
       .then(()=>{
