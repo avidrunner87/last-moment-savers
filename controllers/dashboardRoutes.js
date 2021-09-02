@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
-const { Events, Plans } = require('../models');
+const { Events, Plans, Todos } = require('../models');
 const checkAuthenticated = require('../utils/auth');
 
 router.get('/', withAuth, checkAuthenticated, async (req, res) => {
@@ -46,8 +46,6 @@ router.get('/events/:id', withAuth, checkAuthenticated, async (req, res) => {
                 events_id: req.params.id
             },          
         });
-
-        console.log(eventData);
 
         if (eventData) {
             res.render('dashboard', {
