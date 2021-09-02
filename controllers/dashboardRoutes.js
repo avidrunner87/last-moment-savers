@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
-const { Events, Plans } = require('../models');
+const { Events, Plans, Todos } = require('../models');
 
 router.get('/', withAuth, async (req, res) => {
     try {
@@ -45,8 +45,6 @@ router.get('/events/:id', withAuth, async (req, res) => {
                 events_id: req.params.id
             },          
         });
-
-        console.log(eventData);
 
         if (eventData) {
             res.render('dashboard', {

@@ -1,36 +1,25 @@
-<li>
-    <div class="collapsible-header transparent todo-header">
-        <i class="material-icons todo-chevron">chevron_right</i>
-        Todo Name
-        <a class="btn-floating btn-small todo-delete grey">
-            <i class="material-icons">delete</i>
-        </a>
-    </div>
-    <div class="collapsible-body">
-        <h6>Todo Details</h6>
-    </div>
-</li>
-<li>
-    <div class="collapsible-header transparent todo-header">
-        <i class="material-icons todo-chevron">chevron_right</i>
-        Todo Name
-        <a class="btn-floating btn-small todo-delete grey">
-            <i class="material-icons">delete</i>
-        </a>
-    </div>
-    <div class="collapsible-body todo-details">
-        <h6>Todo Details</h6>
-    </div>
-</li>
-<li>
-    <div class="collapsible-header transparent todo-header">
-        <i class="material-icons todo-chevron">chevron_right</i>
-        Todo Name
-        <a class="btn-floating btn-small todo-delete grey">
-            <i class="material-icons">delete</i>
-        </a>
-    </div>
-    <div class="collapsible-body">
-        <h6>Todo Details</h6>
-    </div>
-</li>
+{{!-- Loop over each todo in the todos array --}}
+{{#each todosData as |todo| }}
+    <li>
+        <div class="collapsible-header transparent plan-header">
+            <i class="material-icons plan-chevron">chevron_right</i>
+            {{todo.dataValues.title}}
+            <a class="btn-floating btn-small plan-edit grey" data-id="{{todo.dataValues.id}}" data-action="edit">
+                <i class="material-icons">edit</i>
+            </a>
+            <a class="btn-floating btn-small plan-delete grey" data-id="{{todo.dataValues.id}}" data-action="delete">
+                <i class="material-icons">delete</i>
+            </a>
+        </div>
+        <div class="collapsible-body">
+            <h6>Event Details</h6>
+            <p>{{todo.dataValues.description}}</p>
+            {{#if todo.dataValues.due_date}}
+                <p>Due Date: {{todo.dataValues.due_date}}</p>
+            {{/if}}
+            {{#if todo.dataValues.status}}
+                <p>Status: {{todo.dataValues.todo}}</p>
+            {{/if}}
+        </div>
+    </li>
+{{/each}}
