@@ -24,14 +24,19 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
     try 
     {
-        const eventData = await Events.findByPk(req.params.id);
+        const eventData = await Events.findByPk(req.params.id, {
+            where: { users_id: req.session.user_id },           
+        });
 
         if (!eventData) {
-            res.status(404).json({ message: "No category found with this id" });
+            res.status(404).json({ message: 'No category found with this id' });
             return;
         }
 
-        res.status(200).json(eventData);
+        req.session.event_id = req.params.id;
+        req.session.save(() => {
+            res.status(200).json(eventData);
+        });        
     }
     catch (err)
     {
@@ -60,14 +65,15 @@ router.post('/', async(req, res) => {
             url: url,
             created_at: newSqlDate,
             updated_at: newSqlDate, 
-            users_id: "d39bae8f-d1e0-43ab-9018-d0c750c72d10"   //RANDOM UUID REPLACE WITH req.session.user_id        
+            users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10'   //RANDOM UUID REPLACE WITH req.session.user_id        
         };
         
         await Events.create(event);
 
+        req.session.event_id = event.id;
         req.session.event_created_at = newSqlDate;
         req.session.save(() => {
-         res.status(200).json({ message:"Added Event" });
+         res.status(200).json({ message:'Added Event' });
         });
     }
     catch (err)
@@ -80,13 +86,10 @@ router.post('/', async(req, res) => {
 router.put('/:id', async(req, res) => {
     try 
     {
-        console.log("MADE IT");
         const { title, start_date, end_date, description, location, type, category, url } = req.body;
-        console.log(req.body);
         const modifiedStartDate =  start_date.includes('-') ? modifyDateForSql(start_date) : start_date;
         const modifiedEndDate = end_date.includes('-') ? modifyDateForSql(end_date) : end_date;
         const newSqlDate = createSqlDate();
-        console.log(modifiedStartDate, modifiedEndDate, newSqlDate);
 
         const updatedEvent = {
             id: req.params.id,
@@ -98,7 +101,7 @@ router.put('/:id', async(req, res) => {
             type: type,
             category: category,
             url: url,
-            created_at: "2021/04/05", //REPLACE WITH req.session.event_created_at
+            created_at: '2021/04/05', //REPLACE WITH req.session.event_created_at
             updated_at: newSqlDate,            
         };
 
@@ -106,7 +109,7 @@ router.put('/:id', async(req, res) => {
 
         const eventData = await Events.update(updatedEvent, {
             where: {
-                users_id: "d39bae8f-d1e0-43ab-9018-d0c750c72d10",   //RANDOM UUID REPLACE WITH req.session.user_id
+                users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
                 id: req.params.id
             }
         })
@@ -124,7 +127,7 @@ router.delete('/:id', async(req, res) => {
     {
         const eventData = await Events.destroy({
             where: {
-                users_id: "d39bae8f-d1e0-43ab-9018-d0c750c72d10",   //RANDOM UUID REPLACE WITH req.session.user_id
+                users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
                 id: req.params.id
             }           
         });
@@ -148,11 +151,11 @@ module.exports = router;
 
 function createSqlDate() {
     const date = new Date().toLocaleDateString();
-    const dateArray = date.split("/");
-    return dateArray[2] + "/" + dateArray[0] + "/" + dateArray[1];
+    const dateArray = date.split('/');
+    return dateArray[2] + '/' + dateArray[0] + '/' + dateArray[1];
 }
 
 function modifyDateForSql(date) {
-    const dateArray = date.split("-");
-    return dateArray[2] + "/" + dateArray[0] + "/" + dateArray[1];
+    const dateArray = date.split('-');
+    return dateArray[2] + '/' + dateArray[0] + '/' + dateArray[1];
 }

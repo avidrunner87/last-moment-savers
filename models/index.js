@@ -16,13 +16,13 @@ Events.belongsTo(Users, {
     }
 });
 
-Users.hasMany(Events, {
-    as: 'users',
-    foreignKey: {
-        name: 'users_id',
-        allowNull: false
-    }
-})
+// Users.hasMany(Events, {
+//     as: 'users',
+//     foreignKey: {
+//         name: 'users_id',
+//         allowNull: false
+//     }
+// })
 
 Plans.belongsTo(Users, {
     as: 'users',
