@@ -36,7 +36,7 @@ function checkAuthenticated(req, res, next){
       }
       verify()
       .then(()=>{
-          req.users = User;
+          req.user = User;
           next();
       })
       .catch(err=>{
