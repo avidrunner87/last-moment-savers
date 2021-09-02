@@ -39,4 +39,24 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.post('/', (req,res)=>{
+    let token = req.body.token;
+
+    async function verify() {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: '770425769909-1b53dbhequvdv35mnu4o28mjn7mo7jnr.apps.googleusercontent.com'
+        });
+        const payload = ticket.getPayload();
+        const usersid = payload['sub'];
+      }
+      verify()
+      .then(()=>{
+          res.cookie('session-token', token);
+          res.send('success')
+      })
+      .catch(console.error);
+
+});
+
 module.exports = router;
