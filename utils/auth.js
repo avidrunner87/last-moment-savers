@@ -23,7 +23,7 @@ function checkAuthenticated(req, res, next){
 
     let token = req.cookies['session-token'];
 
-    let Users = {};
+    let User = {Users};
     async function verify() {
         const ticket = await client.verifyIdToken({
             idToken: token,
@@ -36,7 +36,7 @@ function checkAuthenticated(req, res, next){
       }
       verify()
       .then(()=>{
-          req.users = Users;
+          req.users = User;
           next();
       })
       .catch(err=>{
