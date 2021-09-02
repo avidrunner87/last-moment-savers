@@ -4,8 +4,6 @@ const { Users, Interactions, Events, Plans, Todos } = require('../../models');
 
 // Get all events associated to a user
 router.get('/', async(req, res) => {
-    console.log(req);
-
     try {
         const user_id = req.session.user_id; 
 
@@ -17,8 +15,7 @@ router.get('/', async(req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.status(500).json(err);
-    }    
+    }
 });
 
 // TODO: Get a single event using the ID
@@ -47,7 +44,6 @@ router.get('/:id', async(req, res) => {
 
 // Create a new event
 router.post('/', async(req, res) => {
-
     try {
         const eventData = await Events.create({
             id: uuid(),
@@ -130,8 +126,10 @@ router.delete('/:id', async(req, res) => {
             res.status(404).json({ message: 'No event found with this id!' });
             return;
         }
+      
         res.status(200).json(eventData);
     }
+  
     catch (err)
     {
         res.status(500).json(err);
