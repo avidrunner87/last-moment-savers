@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { uuid } = require('uuidv4');
-const { Users, Interactions, Events, Plans, Todos } = require('../../models');
-const { createSqlDate, modifyDateForSql } = require('../../utils/dateHelper');
+const { Events } = require('../../models');
 
 // TODO: Get all todo associated to a user
 router.get('/', async(req, res) => {
@@ -61,30 +60,28 @@ router.post('/', async(req, res) => {
     try 
     {      
         const { title, start_date, end_date, description, location, type, category, url } = req.body;
-        const modifiedStartDate = modifyDateForSql(start_date);
-        const modifiedEndDate = modifyDateForSql(end_date);
-        const newSqlDate = createSqlDate();        
+        const currentDate = new Date().toLocaleDateString();    
 
         const event = {
             id: uuid(),
             title: title,
-            start_date: modifiedStartDate,
-            end_date: modifiedEndDate,
+            start_date: start_date,
+            end_date: end_date,
             description: description,
             location: location,
             type: type,
             category: category,
             url: url,
-            created_at: newSqlDate,
-            updated_at: newSqlDate, 
+            created_at: currentDate,
+            updated_at: currentDate, 
             //users_id: req.session.user_id,
             users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10'   //RANDOM UUID REPLACE WITH req.session.user_id        
         };
         
         await Events.create(event);
 
-        req.session.events_id = event.id;
-        req.session.event_created_at = newSqlDate;
+        req.session.event_id = event.id;
+        req.session.event_created_at = event.created_at;
         req.session.save(() => {
          res.status(200).json({ message:'Added Event' });
         });
@@ -97,32 +94,41 @@ router.post('/', async(req, res) => {
 
 // TODO: Take form information via api body and update an event in the DB
 router.put('/:id', async(req, res) => {
+    /*req.body example
+    {
+        "title": "Update Event Check",
+        "start_date": "05-05-2022",
+        "end_date": "06-06-2022",
+        "description": "Checking for Update Event",
+        "location": "123 fake street",
+        "type": "get together",
+        "category": "friends",
+        "url": "www.eventupdatecheck"
+    }*/
     try 
     {
-        const { title, start_date, end_date, description, location, type, category, url } = req.body;
-        const modifiedStartDate =  start_date.includes('-') ? modifyDateForSql(start_date) : start_date;
-        const modifiedEndDate = end_date.includes('-') ? modifyDateForSql(end_date) : end_date;
-        const newSqlDate = createSqlDate();
+        const { title, start_date, end_date, description, location, type, category, url } = req.body;        
+        const currentDate = new Date().toLocaleDateString();
 
         const updatedEvent = {
             id: req.params.id,
             title: title,
-            start_date: modifiedStartDate,
-            end_date: modifiedEndDate,
+            start_date: start_date,
+            end_date: end_date,
             description: description,
             location: location,
             type: type,
             category: category,
             url: url,
-            created_at: req.session.event_created_at,
-            //created_at: '2021/04/05', //REPLACE WITH req.session.events_created_at
-            updated_at: newSqlDate,            
+            //created_at: req.session.event_created_at,
+            created_at: '04/05/2021', //REPLACE WITH req.session.events_created_at
+            updated_at: currentDate,            
         };
 
         const eventData = await Events.update(updatedEvent, {
             where: {
-                //users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
-                users_id: req.session.user_id,
+                users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
+                //users_id: req.session.user_id,
                 id: req.params.id
             }
         })
@@ -162,14 +168,3 @@ module.exports = router;
 
 // TODO: Every new db item needs the created_at and updated_at fields populated
 // TODO: Every update to db item needs the updated_at field populated
-
-// function createSqlDate() {
-//     const date = new Date().toLocaleDateString();
-//     const dateArray = date.split('/');
-//     return dateArray[2] + '/' + dateArray[0] + '/' + dateArray[1];
-// }
-
-// function modifyDateForSql(date) {
-//     const dateArray = date.split('-');
-//     return dateArray[2] + '/' + dateArray[0] + '/' + dateArray[1];
-// }

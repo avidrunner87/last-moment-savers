@@ -57,17 +57,16 @@ router.post('/', async(req, res) => {
     try 
     {      
         const { title, description, due_date, status } = req.body;
-        const modifiedDueDate = modifyDateForSql(due_date);
-        const newSqlDate = createSqlDate();        
+        const currentDate = new Date().toLocaleDateString();        
 
         const todo = {
             id: uuid(),
             title: title,
             description: description,
-            due_date: modifiedDueDate, 
+            due_date: currentDate, 
             status: status,          
-            created_at: newSqlDate,
-            updated_at: newSqlDate, 
+            created_at: currentDate,
+            updated_at: currentDate, 
             users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id 
             plan_id: 'test-this-plan' //RANDOM UUID TO TEST PLAN REPLACE WITH req.session.plan_id       
         };

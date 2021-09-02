@@ -59,13 +59,15 @@ router.post('/', async(req, res) => {
     try 
     {      
         const { title } = req.body;
-        const newSqlDate = createSqlDate();        
+        const currentDate = new Date().toLocaleDateString();        
 
         const plan = {
             id: uuid(),
             title: title,            
-            created_at: newSqlDate,
-            updated_at: newSqlDate, 
+            created_at: currentDate,
+            updated_at: currentDate,
+            //users_id: req.session.user_id,
+            //events_id: req.session.event_id, 
             users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id 
             events_id: 'test-this-event' //RANDOM UUID TO TEST EVENT REPLACE WITH req.session.event_id       
         };
@@ -73,7 +75,7 @@ router.post('/', async(req, res) => {
         await Plans.create(plan);
 
         req.session.plan_id = plan.id;
-        req.session.plan_created_at = newSqlDate;
+        req.session.plan_created_at = plan.created_at;
         req.session.save(() => {
          res.status(200).json({ message:'Added Plan' });
         });
@@ -89,17 +91,20 @@ router.put('/:id', async(req, res) => {
     try 
     {
         const { title } = req.body;        
-        const newSqlDate = createSqlDate();
+        const currentDate = new Date().toLocaleDateString(); ;
 
         const updatedPlan = {
             id: req.params.id,
             title: title,
-            created_at: '2021/04/05', //REPLACE WITH req.session.plan_created_at
-            updated_at: newSqlDate                          
+            //created_at: req.session.plan_created_at,
+            created_at: '04/05/2021', //REPLACE WITH req.session.plan_created_at
+            updated_at: currentDate                          
         };
 
         const planData = await Plans.update(updatedPlan, {
             where: { 
+                //users_id: req.session.user_id,
+                //events_id: req.session.event_id,
                 users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',  //RANDOM UUID REPLACE WITH req.session.user_id 
                 events_id: 'test-this-event', //RANDOM UUID TO TEST EVENT REPLACE WITH req.session.event_id
                 id: req.params.id 
@@ -119,6 +124,8 @@ router.delete('/:id', async(req, res) => {
     {
         const planData = await Plans.destroy({
             where: { 
+                //users_id: req.session.user_id,
+                //events_id: req.session.event_id,I
                 users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',  //RANDOM UUID REPLACE WITH req.session.user_id 
                 events_id: 'test-this-event', //RANDOM UUID TO TEST EVENT REPLACE WITH req.session.event_id
                 id: req.params.id 
