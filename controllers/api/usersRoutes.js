@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { uuid } = require('uuidv4');
-const withAuth = require('../../utils/auth');
 const { Users } = require('../../models');
 
 
