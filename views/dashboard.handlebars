@@ -1,22 +1,35 @@
 <header class="no-padding has-fixed-sidenav">
 	{{> sideNav }}
 </header>
-<main class="no-padding">
-	<div class="container">
-		<div class="row section">
-			<div class="col s12">
-				
+<main class="no-padding has-fixed-sidenav">
+	<div class="navbar-fixed">
+		<div class="container">
+			<div class="row section">
+				<div class="col s12">
+					<div class="card teal">
+						<div class="card-content white-text">
+							<span class="card-title">Event Name</span>
+							<p>Event Details</p>
+						</div>
+						<div class="action card-action">
+							<a href="#" class="btn grey darken-2 white-text z-depth-0">New Plan</a>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="row section">
-			<div class="col s12">
-				
-			</div>
-		</div>
-		<div class="row section">
-			<div class="col s12">
-				
+			<div class="row section">
+				<div class="col s12">
+					<div class="card blue">
+						<div class="card-content white-text">
+							<span class="card-title">Plans</span>
+							<ul class="collapsible z-depth-0 col-flat">
+								{{> plansList }}
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+
 </main>

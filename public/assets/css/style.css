@@ -23,8 +23,8 @@
     height: 100vh;
 }
 
-.card {
-    border-radius: 20px;
+.card, .action {
+    border-radius: 20px !important;
 }
 
 .modal-card {
@@ -48,14 +48,28 @@
     padding: 0 32px;
 }
 
-.sidenav .collapsible .active .collapsible-header .chevron {
+.collapsible .active .collapsible-header .chevron {
     transform: rotate(90deg);
+}
+
+.collapsible .active .collapsible-header {
+    background-color: #1976d2 !important;
+    border-bottom: none;
 }
 
 .generalContainer {
     position: absolute;
     bottom: 75px;
     width: 100%;
+}
+
+.col-flat {
+    border-left: none;
+    border-right: none;
+}
+
+.plan-badge {
+    margin-left: 10px !important;
 }
 
 /* Change screen when large or greater */
