@@ -2,6 +2,8 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { Users } = require('../models');
 const { uuid } = require('uuidv4');
 
+/*Gave the first two users a static uuid for testing*/
+
 const usersData = [
     {
         id: "cab6bfc6-bcc6-467b-8b19-1838f33e7e6b",
@@ -18,21 +20,21 @@ const usersData = [
         password: '12345'
     },
     {
-        id: "9b4845a3-451a-4ff5-93b1-23578e4dd356",
+        id: uuid(),
         first_name: 'Robert',
         last_name: 'Wilson',
         email: 'robert@gmail.com',
         password: '12345'
     },
     {
-        id: "c01830fb-3e4c-420d-900b-f8b6c35d09d7",
+        id: uuid(),
         first_name: 'Andrew',
         last_name: 'Ronchetto',
         email: 'andrew@gmail.com',
         password: '12345'
     },
     {
-        id: "7d8bf725-23f0-425a-a451-01da751c66bf",
+        id: uuid(),
         first_name: 'Autumn',
         last_name: 'Markham',
         email: 'autumn@gmail.com',

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { uuid } = require('uuidv4');
-const { Users, Interactions, Events, Plans, Todos } = require('../../models');
+const { Events } = require('../../models');
 
 const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID = '770425769909-1b53dbhequvdv35mnu4o28mjn7mo7jnr.apps.googleusercontent.com'
@@ -34,11 +34,14 @@ router.get('/:id', async(req, res) => {
         });
 
         if (!eventData) {
-            res.status(404).json({ message: "No category found with this id" });
+            res.status(404).json({ message: 'No event found with this id' });
             return;
         }
 
-        res.status(200).json(eventData);
+        req.session.event_id = req.params.id;
+        req.session.save(() => {
+            res.status(200).json(eventData);
+        });        
     }
     catch (err)
     {
@@ -48,6 +51,17 @@ router.get('/:id', async(req, res) => {
 
 // Create a new event
 router.post('/', async(req, res) => {
+    /*req.body example
+    {
+        "title": "Post Event Check",
+        "start_date": "05-05-2022",
+        "end_date": "06-06-2022",
+        "description": "Checking for Post Event",
+        "location": "123 fake street",
+        "type": "get together",
+        "category": "friends",
+        "url": "www.eventpostcheck"
+    }*/
     try {
         const eventData = await Events.create({
             id: uuid(),
@@ -75,35 +89,41 @@ router.post('/', async(req, res) => {
 
 // TODO: Take form information via api body and update an event in the DB
 router.put('/:id', async(req, res) => {
+    /*req.body example
+    {
+        "title": "Update Event Check",
+        "start_date": "05-05-2022",
+        "end_date": "06-06-2022",
+        "description": "Checking for Update Event",
+        "location": "123 fake street",
+        "type": "get together",
+        "category": "friends",
+        "url": "www.eventupdatecheck"
+    }*/
     try 
     {
-        console.log("MADE IT");
-        const { title, start_date, end_date, description, location, type, category, url } = req.body;
-        console.log(req.body);
-        const modifiedStartDate =  start_date.includes('-') ? modifyDateForSql(start_date) : start_date;
-        const modifiedEndDate = end_date.includes('-') ? modifyDateForSql(end_date) : end_date;
-        const newSqlDate = createSqlDate();
-        console.log(modifiedStartDate, modifiedEndDate, newSqlDate);
+        const { title, start_date, end_date, description, location, type, category, url } = req.body;        
+        const currentDate = new Date().toLocaleDateString();
 
         const updatedEvent = {
             id: req.params.id,
             title: title,
-            start_date: modifiedStartDate,
-            end_date: modifiedEndDate,
+            start_date: start_date,
+            end_date: end_date,
             description: description,
             location: location,
             type: type,
             category: category,
             url: url,
-            created_at: "2021/04/05", //REPLACE WITH req.session.event_created_at
-            updated_at: newSqlDate,            
+            //created_at: req.session.event_created_at,
+            created_at: '04/05/2021', //REPLACE WITH req.session.events_created_at
+            updated_at: currentDate,            
         };
-
-        console.log(updatedEvent);
 
         const eventData = await Events.update(updatedEvent, {
             where: {
-                users_id: "d39bae8f-d1e0-43ab-9018-d0c750c72d10",   //RANDOM UUID REPLACE WITH req.session.user_id
+                users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
+                //users_id: req.session.user_id,
                 id: req.params.id
             }
         })
@@ -121,7 +141,8 @@ router.delete('/:id', async(req, res) => {
     {
         const eventData = await Events.destroy({
             where: {
-                users_id: "d39bae8f-d1e0-43ab-9018-d0c750c72d10",   //RANDOM UUID REPLACE WITH req.session.user_id
+                //users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10',   //RANDOM UUID REPLACE WITH req.session.user_id
+                users_id: req.session.user_id,
                 id: req.params.id
             }           
         });
