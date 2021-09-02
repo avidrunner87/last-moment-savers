@@ -2,10 +2,11 @@ const router = require('express').Router();
 const { uuid } = require('uuidv4');
 const { Users, Interactions, Events, Plans, Todos } = require('../../models');
 
-// TODO: Get all todo associated to a user
+// Get all events associated to a user
 router.get('/', async(req, res) => {
-    try 
-    {
+    console.log(req);
+
+    try {
         const user_id = req.session.user_id; 
 
         const eventsData = await Events.findAll({
@@ -14,8 +15,8 @@ router.get('/', async(req, res) => {
 
         res.status(200).json(eventsData);
     }
-    catch (err)
-    {
+    catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }    
 });
@@ -39,7 +40,7 @@ router.get('/:id', async(req, res) => {
     }    
 });
 
-// TODO: Take form information via api body and create a new event in the DB
+// Create a new event
 router.post('/', async(req, res) => {
 
     try {

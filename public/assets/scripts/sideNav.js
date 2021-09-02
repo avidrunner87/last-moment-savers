@@ -22,8 +22,6 @@ $('#event-newSubmit').on('click', async function (event) {
             url: document.getElementById('event-url').value
         }
 
-        console.log(event);
-
         const response = await fetch('/api/events', {
             method: 'POST',
             headers: { 

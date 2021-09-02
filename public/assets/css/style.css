@@ -85,9 +85,14 @@
     width: 100%;
 }
 
-.events-add {
+.event-edit {
     position: absolute;
-    right: 10px;
+    right: 70px;
+}
+
+.event-delete {
+    position: absolute;
+    right: 25px;
 }
 
 .plans-add {

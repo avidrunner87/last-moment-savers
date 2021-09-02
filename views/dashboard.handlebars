@@ -2,14 +2,47 @@
 	{{> sideNav }}
 </header>
 <main class="no-padding has-fixed-sidenav">
+	{{#if eventData}}
 	<div class="navbar-fixed">
 		<div class="container">
 			<div class="row section">
 				<div class="col s12">
 					<div class="card teal">
 						<div class="card-content white-text">
-							<span class="card-title">Event Name</span>
-							<p>Event Details</p>
+							<span class="card-title">
+								{{eventData.dataValues.title}}
+								{{#if eventData.dataValues.location}}
+									<a class="btn-flat white-text">
+										<i class="material-icons">location_on</i>
+									</a>
+								{{/if}}
+								{{#if eventData.dataValues.url}}
+									<a class="btn-flat white-text">
+										<i class="material-icons">link</i>
+									</a>
+								{{/if}}
+								<a class="btn-floating btn-small event-edit grey">
+									<i class="material-icons">edit</i>
+								</a>
+								<a class="btn-floating btn-small event-delete grey">
+									<i class="material-icons">delete</i>
+								</a>
+							</span>
+							<h6>Event Details</h6>
+							<p>{{eventData.dataValues.description}}</p>
+							{{#if eventData.dataValues.type}}
+								<p>Type: {{eventData.dataValues.type}}</p>
+							{{/if}}
+							{{#if eventData.dataValues.category}}
+								<p>Category: {{eventData.dataValues.category}}</p>
+							{{/if}}
+							{{#if eventData.dataValues.start_date}}
+								<p>Start Date: {{eventData.dataValues.start_date}}</p>
+							{{/if}}
+							{{#if eventData.dataValues.end_date}}
+								<p>End Date: {{eventData.dataValues.end_date}}</p>
+							{{/if}}
+							
 						</div>
 					</div>
 				</div>
@@ -33,7 +66,7 @@
 			</div>
 		</div>
 	</div>
-
+	{{/if}}
 </main>
 
 <script src="/assets/scripts/dashboard.js"></script>
