@@ -23,23 +23,127 @@
     height: 100vh;
 }
 
-.login-card {
-    border-radius: 20px;
+.card, .action, .plan, .todo {
+    border-radius: 20px !important;
+}
+
+.plan li:first-child .plan-header,
+.todo li:first-child .todo-header  {
+    border-radius: 20px 20px 0 0 !important;
+}
+
+.plan li:first-child,
+.todo li:first-child {
+    border-radius: 0 0 20px 20px;
+}
+
+.todo li:last-child {
+    border-bottom-left-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
 }
 
 .modal-card {
     max-width: 500px;
-    border-radius: 20px;
 }
 
 .sideNavDiv {
-    min-height: 75px;
+    min-height: 65px;
 }
 
 .sideNavHeader {
-    font-size: 2.1rem;
+    font-size: 2rem;
 }
 
 .sideNavHeader > .material-icons {
     margin: 0px 10px;
+}
+
+.sidenav .collapsible-header,
+.sidenav.fixed .collapsible-header {
+    padding: 0 32px;
+}
+
+.active .event-header .event-chevron,
+.plan .active .collapsible-header .plan-chevron,
+.todo .active .collapsible-header .todo-chevron {
+    transform: rotate(90deg);
+}
+
+.plan .active .plan-header,
+.todo .active .todo-header {
+    background-color: #1976d2 !important;
+}
+
+.plan .active .plan-header,
+.todo .active .todo-header {
+    border-bottom: none;
+}
+
+.generalContainer {
+    position: absolute;
+    bottom: 75px;
+    width: 100%;
+}
+
+.event-edit {
+    position: absolute;
+    right: 70px;
+}
+
+.event-delete {
+    position: absolute;
+    right: 25px;
+}
+
+.plans-add {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+}
+
+.plan-edit {
+    position: absolute;
+    right: 85px;
+}
+
+.plan-delete {
+    position: absolute;
+    right: 35px;
+}
+
+.plan-badge {
+    margin-left: 10px !important;
+}
+
+.todos-add {
+    position: absolute;
+    right: 65px;
+}
+
+.todo-delete {
+    position: absolute;
+    right: 65px;
+}
+
+.event-quickList > ul > li {
+    height: 48px;
+}
+
+/* Change screen when large or greater */
+@media screen and (min-width: 993px) {
+    .has-fixed-sidenav .navbar-fixed {
+        width: calc(100% - 300px);
+        left: 300px;
+    }
+
+    .nav-mobile {
+        display: none;
+    }
+}
+
+/* Change screen when medium or smaller */
+@media screen and (max-width: 992px) {
+    .sideNavDiv {
+        display: none;
+    }
 }

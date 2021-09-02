@@ -2,30 +2,31 @@ const router = require('express').Router();
 const { uuid } = require('uuidv4');
 const { Events } = require('../../models');
 
-// TODO: Get all todo associated to a user
+// Get all events associated to a user
 router.get('/', async(req, res) => {
-    try 
-    {
+    try {
         const user_id = req.session.user_id; 
 
-        const allEventsData = await Events.findAll({
+        const eventsData = await Events.findAll({
             where: { users_id: user_id },          
         });
 
-        res.status(200).json(allEventsData);
+        res.status(200).json(eventsData);
     }
-    catch (err)
-    {
-        res.status(500).json(err);
-    }    
+    catch (err) {
+        console.log(err);
+    }
 });
 
 // TODO: Get a single event using the ID
 router.get('/:id', async(req, res) => {
     try 
     {
-        const eventData = await Events.findByPk(req.params.id, {
-            where: { users_id: req.session.user_id },           
+        const eventData = await Events.findOne({
+            where: {
+                users_id: user_id,
+                id: req.params.id
+            }
         });
 
         if (!eventData) {
@@ -44,7 +45,7 @@ router.get('/:id', async(req, res) => {
     }    
 });
 
-// TODO: Take form information via api body and create a new event in the DB
+// Create a new event
 router.post('/', async(req, res) => {
     /*req.body example
     {
@@ -57,37 +58,27 @@ router.post('/', async(req, res) => {
         "category": "friends",
         "url": "www.eventpostcheck"
     }*/
-    try 
-    {      
-        const { title, start_date, end_date, description, location, type, category, url } = req.body;
-        const currentDate = new Date().toLocaleDateString();    
-
-        const event = {
+    try {
+        const eventData = await Events.create({
             id: uuid(),
-            title: title,
-            start_date: start_date,
-            end_date: end_date,
-            description: description,
-            location: location,
-            type: type,
-            category: category,
-            url: url,
-            created_at: currentDate,
-            updated_at: currentDate, 
-            //users_id: req.session.user_id,
-            users_id: 'd39bae8f-d1e0-43ab-9018-d0c750c72d10'   //RANDOM UUID REPLACE WITH req.session.user_id        
-        };
-        
-        await Events.create(event);
-
-        req.session.event_id = event.id;
-        req.session.event_created_at = event.created_at;
-        req.session.save(() => {
-         res.status(200).json({ message:'Added Event' });
+            title: req.body.title,
+            description: req.body.description,          
+            type: req.body.type,
+            category: req.body.category,
+            start_date: req.body.start_date || null,
+            end_date: req.body.end_date || null,
+            location: req.body.location,
+            url: req.body.url,
+            created_at: new Date(),
+            updated_at: new Date(), 
+            users_id: req.session.user_id 
         });
-    }
-    catch (err)
-    {
+
+        req.session.save(() => {
+            res.status(200).json({ message:"Added Event" });
+        });
+    } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }    
 });
@@ -155,9 +146,11 @@ router.delete('/:id', async(req, res) => {
         if (!eventData) {
             res.status(404).json({ message: 'No event found with this id!' });
             return;
-          }
+        }
+      
         res.status(200).json(eventData);
     }
+  
     catch (err)
     {
         res.status(500).json(err);

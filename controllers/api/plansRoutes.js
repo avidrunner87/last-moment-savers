@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { Users, Interactions, Events, Plans, Todos } = require('../../models');
-const { createSqlDate, modifyDateForSql } = require('../../utils/dateHelper');
+const { uuid } = require('uuidv4');
+const { Plans } = require('../../models');
 
 // TODO: Get all plans associated to a user ID and event ID
 router.get('/', async(req, res) => {
@@ -15,7 +15,6 @@ router.get('/', async(req, res) => {
                 events_id: event_id  
             },          
         });
-
         res.status(200).json(allPlansData);
     }
     catch (err)
@@ -23,6 +22,29 @@ router.get('/', async(req, res) => {
         res.status(500).json(err);
     }    
 });
+
+// Create a new plans
+router.post('/', async(req, res) => {
+
+    try {
+        const plansData = await Plans.create({
+            id: uuid(),
+            title: req.body.title,
+            created_at: new Date(),
+            updated_at: new Date(),
+            events_id: req.body.events_id,
+            users_id: req.session.user_id 
+        });
+
+        req.session.save(() => {
+            res.status(200).json({ message:"Added Plan" });
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }    
+});
+
 
 // TODO: Get a single plan using the user ID and event ID
 router.get('/:id', async(req, res) => {
