@@ -1,47 +1,34 @@
-<li>
-    <div class="collapsible-header transparent plan-header">
-        <i class="material-icons plan-chevron">chevron_right</i>
-        Plan Name
-        <a class="btn-floating btn-small plan-delete grey">
-            <i class="material-icons">delete</i>
-        </a>
+{{!-- Loop over each event in the events array --}}
+{{#each plansData as |plan| }}
+    <li>
+        <div class="collapsible-header transparent plan-header">
+            <i class="material-icons plan-chevron">chevron_right</i>
+            {{plan.dataValues.title}}
+            <a class="btn-floating btn-small plan-delete grey">
+                <i class="material-icons">delete</i>
+            </a>
 
-        <span class="new badge grey plan-badge" data-badge-caption="todo">4</span>
-        <span class="new badge green plan-badge" data-badge-caption="active">2</span>
-        <span class="new badge purple plan-badge" data-badge-caption="complete">10</span>
-    </div>
-    <div class="collapsible-body">
-        <span class="card-title">
-            Todos
-            <a class="btn-floating btn-small todos-add grey">
-                <i class="material-icons">add</i>
+            <a class="btn-floating btn-small plan-edit grey" data-id="{{plan.dataValues.id}}" data-action="edit">
+                <i class="material-icons">edit</i>
             </a>
-        </span>				
-        <ul class="collapsible z-depth-0 todo">
-            {{> todosList }}
-        </ul>
-    </div>
-</li>
-<li>
-    <div class="collapsible-header transparent plan-header">
-        <i class="material-icons plan-chevron">chevron_right</i>
-        Plan Name
-        <a class="btn-floating btn-small plan-delete grey">
-            <i class="material-icons">delete</i>
-        </a>
-        <span class="new badge grey plan-badge" data-badge-caption="todo">20</span>
-        <span class="new badge green plan-badge" data-badge-caption="active">5</span>
-        <span class="new badge purple plan-badge" data-badge-caption="complete">2</span>
-    </div>
-    <div class="collapsible-body">
-        <span class="card-title">
-            Todos
-            <a class="btn-floating btn-small todos-add grey">
-                <i class="material-icons">add</i>
+            <a class="btn-floating btn-small plan-delete grey" data-id="{{plan.dataValues.id}}" data-action="delete">
+                <i class="material-icons">delete</i>
             </a>
-        </span>				
-        <ul class="collapsible z-depth-0 todo">
-            {{> todosList }}
-        </ul>
-    </div>
-</li>
+
+            <span class="new badge grey plan-badge" data-badge-caption="todo">4</span>
+            <span class="new badge green plan-badge" data-badge-caption="active">2</span>
+            <span class="new badge purple plan-badge" data-badge-caption="complete">10</span>
+        </div>
+        <div class="collapsible-body">
+            <span class="card-title">
+                Todos
+                <a class="btn-floating btn-small todos-add grey">
+                    <i class="material-icons">add</i>
+                </a>
+            </span>				
+            <ul class="collapsible z-depth-0 todo">
+                {{> todosList }}
+            </ul>
+        </div>
+    </li>
+{{/each}}

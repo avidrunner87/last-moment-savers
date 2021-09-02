@@ -25,7 +25,12 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
     try 
     {
-        const eventData = await Events.findByPk(req.params.id);
+        const eventData = await Events.findOne({
+            where: {
+                users_id: user_id,
+                id: req.params.id
+            }
+        });
 
         if (!eventData) {
             res.status(404).json({ message: "No category found with this id" });

@@ -101,6 +101,11 @@
     right: 35px;
 }
 
+.plan-edit {
+    position: absolute;
+    right: 85px;
+}
+
 .plan-delete {
     position: absolute;
     right: 35px;
@@ -118,6 +123,10 @@
 .todo-delete {
     position: absolute;
     right: 65px;
+}
+
+.event-quickList > ul > li {
+    height: 48px;
 }
 
 /* Change screen when large or greater */
