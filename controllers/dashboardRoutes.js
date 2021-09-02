@@ -3,6 +3,10 @@ const withAuth = require('../utils/auth');
 const { Events, Plans, Todos } = require('../models');
 const checkAuthenticated = require('../utils/auth');
 
+const {OAuth2Client} = require('google-auth-library');
+const CLIENT_ID = '770425769909-1b53dbhequvdv35mnu4o28mjn7mo7jnr.apps.googleusercontent.com'
+const client = new OAuth2Client(CLIENT_ID)
+
 router.get('/', withAuth, checkAuthenticated, async (req, res) => {
     try {
 
