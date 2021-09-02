@@ -26,16 +26,17 @@ function checkAuthenticated(req, res, next){
 
     let token = req.cookies['session-token'];
 
-    let user = {};
+    let Users = {};
     async function verify() {
         const ticket = await client.verifyIdToken({
             idToken: token,
             audience: CLIENT_ID,  
         });
         const payload = ticket.getPayload();
-        user.name = payload.name;
-        user.email = payload.email;
-        user.picture = payload.picture;
+        Users.first_name = payload.given_name;
+        Users.last_name = payload.family_name;
+        Users.email = payload.email;
+        Users.password = payload.password;
       }
       verify()
       .then(()=>{
