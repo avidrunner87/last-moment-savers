@@ -60,8 +60,8 @@ In addition to the _Project Requirements_ above:
 ## Mock-up
 The following picture shows the website appearance and capabilities:
 
-<img src="./assets/images/screenshots/screenshot01.png" width="300"><br>
-<img src="./assets/images/screenshots/screenshot02.png" width="300"><br>
+<img src="./public/assets/images/screenshots/screenshot01.png" width="300"><br>
+<img src="./public/assets/images/screenshots/screenshot02.png" width="300"><br>
 
 ## Installation
 To fork this code to further improve the website, please follow these directions:
